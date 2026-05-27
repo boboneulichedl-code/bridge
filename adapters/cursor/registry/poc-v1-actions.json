@@ -1,0 +1,155 @@
+{
+  "registryVersion": "poc-v1.2.0",
+  "adapterId": "cursor",
+  "rollbackAvailable": true,
+  "actions": [
+    {
+      "actionId": "cursor.ide.status.get",
+      "domain": "ide",
+      "method": "extension-api",
+      "stability": "stable",
+      "requiredPermission": "read",
+      "destructive": false,
+      "needsConfirmation": false,
+      "rollbackPossible": false,
+      "rollbackAvailable": false,
+      "supportedCursorVersions": [">=2.0.0"],
+      "fallbackMethods": [
+        { "method": "cli", "when": "extension-unreachable", "actions": ["process-check", "cursor --version"] }
+      ]
+    },
+    {
+      "actionId": "cursor.ide.workspace.open",
+      "domain": "ide",
+      "method": "extension-api",
+      "stability": "stable",
+      "requiredPermission": "workspace",
+      "destructive": false,
+      "needsConfirmation": true,
+      "rollbackPossible": true,
+      "rollbackAvailable": false,
+      "supportedCursorVersions": [">=2.0.0"],
+      "fallbackMethods": [
+        { "method": "cli", "when": "extension-unreachable", "command": "cursor \"{path}\"" }
+      ]
+    },
+    {
+      "actionId": "cursor.ide.fs.mkdir",
+      "domain": "ide",
+      "method": "extension-api",
+      "stability": "stable",
+      "requiredPermission": "fs-write",
+      "destructive": false,
+      "needsConfirmation": false,
+      "rollbackPossible": true,
+      "rollbackAvailable": false,
+      "supportedCursorVersions": [">=2.0.0"],
+      "fallbackMethods": [
+        { "method": "filesystem", "when": "extension-unreachable", "guard": "path-in-allowlist" }
+      ]
+    },
+    {
+      "actionId": "cursor.ide.fs.write",
+      "domain": "ide",
+      "method": "extension-api",
+      "stability": "stable",
+      "requiredPermission": "fs-write",
+      "destructive": false,
+      "needsConfirmation": false,
+      "needsConfirmationOnOverwrite": true,
+      "rollbackPossible": true,
+      "rollbackAvailable": true,
+      "supportedCursorVersions": [">=2.0.0"],
+      "fallbackMethods": [
+        { "method": "filesystem", "when": "extension-unreachable", "guard": "path-in-allowlist" }
+      ]
+    },
+    {
+      "actionId": "cursor.ide.settings.get",
+      "domain": "ide",
+      "method": "extension-api",
+      "stability": "stable",
+      "requiredPermission": "read",
+      "destructive": false,
+      "needsConfirmation": false,
+      "rollbackPossible": false,
+      "rollbackAvailable": false,
+      "supportedCursorVersions": [">=2.0.0"],
+      "fallbackMethods": [
+        { "method": "filesystem", "when": "extension-unreachable", "path": ".vscode/settings.json" }
+      ]
+    },
+    {
+      "actionId": "cursor.ide.settings.set",
+      "domain": "ide",
+      "method": "extension-api",
+      "stability": "stable",
+      "requiredPermission": "settings",
+      "destructive": false,
+      "needsConfirmation": true,
+      "rollbackPossible": true,
+      "rollbackAvailable": true,
+      "supportedCursorVersions": [">=2.0.0"],
+      "fallbackMethods": [
+        { "method": "filesystem", "when": "extension-unreachable", "guard": "path-in-allowlist" }
+      ]
+    },
+    {
+      "actionId": "cursor.ide.extension.install",
+      "domain": "ide",
+      "method": "extension-command",
+      "stability": "probable",
+      "requiredPermission": "extension-manage",
+      "destructive": false,
+      "needsConfirmation": true,
+      "externalCode": true,
+      "rollbackPossible": true,
+      "rollbackAvailable": false,
+      "supportedCursorVersions": [">=2.0.0"],
+      "fallbackMethods": [
+        { "method": "cli", "when": "extension-command-failed", "command": "cursor --install-extension {extensionId}" }
+      ]
+    },
+    {
+      "actionId": "cursor.ide.terminal.run",
+      "domain": "ide",
+      "method": "extension-api",
+      "stability": "stable",
+      "requiredPermission": "terminal",
+      "destructive": true,
+      "needsConfirmation": true,
+      "rollbackPossible": false,
+      "rollbackAvailable": false,
+      "supportedCursorVersions": [">=2.0.0"],
+      "fallbackMethods": []
+    },
+    {
+      "actionId": "cursor.ide.command.execute",
+      "domain": "ide",
+      "method": "extension-command",
+      "stability": "probable",
+      "requiredPermission": "command-exec",
+      "destructive": true,
+      "needsConfirmation": true,
+      "rollbackPossible": false,
+      "rollbackAvailable": false,
+      "supportedCursorVersions": [">=2.0.0"],
+      "fallbackMethods": []
+    },
+    {
+      "actionId": "cursor.agent.prompt.send",
+      "domain": "agent",
+      "method": "cli",
+      "stability": "stable",
+      "requiredPermission": "agent-run",
+      "destructive": true,
+      "needsConfirmation": true,
+      "rollbackPossible": false,
+      "rollbackAvailable": false,
+      "supportedCursorVersions": [">=2.0.0"],
+      "fallbackMethods": [
+        { "method": "extension-command", "when": "cli-unavailable", "stability": "experimental" }
+      ]
+    }
+  ]
+}

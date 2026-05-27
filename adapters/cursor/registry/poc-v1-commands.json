@@ -1,0 +1,33 @@
+{
+  "version": "p0-v1",
+  "allowedCommands": [
+    {
+      "commandId": "workbench.action.terminal.new",
+      "description": "Neues Terminal"
+    },
+    {
+      "commandId": "workbench.action.files.saveAll",
+      "description": "Alle speichern"
+    },
+    {
+      "commandId": "workbench.action.closeActiveEditor",
+      "description": "Editor schließen"
+    },
+    {
+      "commandId": "workbench.view.explorer",
+      "description": "Explorer fokussieren"
+    },
+    {
+      "commandId": "workbench.view.scm",
+      "description": "Git-Panel"
+    },
+    {
+      "commandId": "workbench.actions.view.problems",
+      "description": "Problems-Panel"
+    },
+    {
+      "commandId": "workbench.action.tasks.runTask",
+      "description": "Task ausführen"
+    }
+  ]
+}

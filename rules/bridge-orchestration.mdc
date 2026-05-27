@@ -1,0 +1,36 @@
+---
+description: Orchestriere MCP-Plugins über Agent Bridge bei Multi-Source-Aufgaben (Errors, Git, Logs, Tabellen, Logcat).
+alwaysApply: false
+---
+
+# Bridge Orchestration
+
+Wenn der User Fehler, Logs, Git, Tabellen, Logcat, CI oder Deploy-Probleme untersucht:
+
+1. **Bridge MCP zuerst**
+   - `bridge_list_integrations` — welche Plugins sind konfiguriert?
+   - `bridge_route` mit Intent (`errors`, `git`, `logs`, `tables`, `logcat`, `deploy`, `investigate`)
+   - `bridge_investigate` für Multi-Source-Pläne
+
+2. **Lokal (kein Plugin)**
+   - `ReadLints` für IDE-Fehler
+   - Shell: `git status`, `git diff`, `git log`
+
+3. **MCP-Plugins parallel nutzen** (wenn konfiguriert)
+
+| Quelle | Plugin | Typische Tools |
+|--------|--------|----------------|
+| Prod-Errors | Sentry | `search_issues`, `get_issue_details` |
+| Logs/APM | Datadog | `query_logs`, `query_metrics` |
+| Build/Runtime | Vercel | `get_deployment_build_logs`, `get_runtime_logs` |
+| Git remote/CI | GitHub | `pull_request_read`, `search_issues` |
+| Tabellen | Notion | `query_database`, `search` |
+| Issues | Linear | `list_issues`, `search_issues` |
+| Web/Browser | Browse | `browser_snapshot`, `browser_network` |
+| Android | android-pilot | `logcat_read`, `lint_run` |
+
+4. **Ergebnisse kombinieren** — strukturiert berichten mit Quellenangabe.
+
+5. **Fehlende Plugins** — Setup-Hinweis aus `bridge_integration_guide` geben.
+
+CLI: `bridge plugins list`, `bridge route errors "…"`, `bridge investigate "…"`

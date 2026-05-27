@@ -1,0 +1,32 @@
+{
+  "name": "cursor-agent-bridge",
+  "version": "2.3.0",
+  "private": true,
+  "description": "Cursor Agent Bridge — API, Mobile UI, Auto-Update, MCP-Orchestrierung",
+  "workspaces": [
+    "shared",
+    "adapters/cursor",
+    "extension",
+    "cli",
+    "mcp-server",
+    "api",
+    "web"
+  ],
+  "scripts": {
+    "build": "npm run build -w @bridge/shared -w @bridge/cursor-adapter -w bridge-cli -w bridge-mcp-server -w bridge-api -w bridge-web -w cursor-agent-bridge && node scripts/generate-version.js && node scripts/generate-catalog.js",
+    "install:all": "npm install && npm run build",
+    "serve": "node api/dist/server.js",
+    "deploy": "bash infra/deploy.sh",
+    "overlay:build": "npm run build --prefix overlay/bridge-overlay",
+    "overlay:pack": "npm run pack --prefix overlay/bridge-overlay",
+    "overlay:install": "powershell -ExecutionPolicy Bypass -File overlay/bridge-overlay/install.ps1",
+    "install:plugins": "npm run build -w @bridge/shared -w bridge-cli -w bridge-mcp-server -w cursor-agent-bridge && node cli/dist/index.js plugins install-all",
+    "dev:web": "npm run dev -w web",
+    "dev:api": "npm run build && npm run serve",
+    "package:extension": "npm run build -w cursor-agent-bridge && cd extension && npx --yes @vscode/vsce package --no-dependencies",
+    "test:p0": "npm test -w @bridge/shared && npm test -w @bridge/cursor-adapter && npm test -w bridge-api && npm test -w cursor-agent-bridge"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

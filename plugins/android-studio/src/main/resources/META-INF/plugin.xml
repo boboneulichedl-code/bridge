@@ -1,0 +1,41 @@
+<idea-plugin>
+  <id>com.coreai.bridge.android-studio</id>
+  <name>Agent Bridge for Android Studio</name>
+  <vendor email="bridge@coreai.dev" url="https://bridge.chatpilot.link">CoreAI</vendor>
+  <description><![CDATA[
+    Steuere den Android-Studio-Agent vollautonom über Bridge — Max Access, Remote-Prompts,
+    Logcat/ADB/Gradle, Multi-Source Debugging. Verbindet sich mit bridge.chatpilot.link.
+  ]]></description>
+
+  <depends>com.intellij.modules.platform</depends>
+  <depends>org.jetbrains.android</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceImplementation="com.coreai.bridge.BridgeSettings"/>
+    <projectService serviceImplementation="com.coreai.bridge.BridgeService"/>
+    <postStartupActivity implementation="com.coreai.bridge.BridgeStartupActivity"/>
+    <notificationGroup id="Bridge" displayType="BALLOON"/>
+  </extensions>
+
+  <actions>
+    <group id="Bridge.Main" text="Bridge" popup="true">
+      <add-to-group group-id="ToolsMenu" anchor="last"/>
+      <action id="Bridge.OpenAiChat" class="com.coreai.bridge.actions.OpenAiChatAction" text="AI-Chat öffnen"/>
+      <action id="Bridge.SendPrompt" class="com.coreai.bridge.actions.SendPromptAction" text="Prompt senden…"/>
+      <action id="Bridge.SendSelection" class="com.coreai.bridge.actions.SendSelectionAction" text="Auswahl an Agent senden"/>
+      <action id="Bridge.Investigate" class="com.coreai.bridge.actions.InvestigateAction" text="Multi-Source Untersuchung…"/>
+      <action id="Bridge.StopGeneration" class="com.coreai.bridge.actions.StopGenerationAction" text="Generierung stoppen"/>
+      <separator/>
+      <action id="Bridge.ShowIntegrations" class="com.coreai.bridge.actions.ShowIntegrationsAction" text="Integrationen"/>
+      <action id="Bridge.ToggleMaxAccess" class="com.coreai.bridge.actions.ToggleMaxAccessAction" text="Max Access umschalten"/>
+      <action id="Bridge.ShowShortcuts" class="com.coreai.bridge.actions.ShowShortcutsAction" text="Tastenkürzel"/>
+    </group>
+  </actions>
+
+  <project-components>
+    <component name="BridgeProjectComponent">
+      <option name="maxAccess" value="true"/>
+      <option name="autonomous" value="true"/>
+    </component>
+  </project-components>
+</idea-plugin>

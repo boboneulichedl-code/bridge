@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "node .cursor/hooks/max-access-shell.js"
+      }
+    ],
+    "beforeMCPExecution": [
+      {
+        "command": "node .cursor/hooks/max-access-mcp.js"
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "node .cursor/hooks/max-access-tool.js",
+        "matcher": "Shell|Write|Task"
+      }
+    ]
+  }
+}

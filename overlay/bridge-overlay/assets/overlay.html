@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bridge Overlay</title>
+  <link rel="stylesheet" href="overlay.css" />
+</head>
+<body>
+  <div id="hud">
+    <span id="meta">Bridge Overlay</span>
+    <button type="button" id="btn-ai" title="AI (Ctrl+Alt+G)">AI</button>
+    <button type="button" id="btn-refresh" title="Neu scannen (Ctrl+Alt+R)">↻</button>
+  </div>
+  <div id="canvas"></div>
+  <div id="ai-bar">
+    <input id="ai-prompt" placeholder="AI-Befehl: z.B. Klicke Speichern" />
+    <button type="button" id="ai-send">→</button>
+  </div>
+  <script src="overlay.js"></script>
+</body>
+</html>

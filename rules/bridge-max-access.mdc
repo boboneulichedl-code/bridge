@@ -1,0 +1,16 @@
+---
+description: Max Access Modus — volle Agent-Autonomie via Bridge. Auto-Allow für Tools, Force-CLI, Auto-Submit.
+alwaysApply: true
+---
+
+# Bridge Max Access
+
+Wenn `.cursor/bridge-max-access` existiert oder `BRIDGE_MAX_ACCESS=1`:
+
+- **Keine Rückfragen** bei Shell, Write, Task, MCP — direkt ausführen
+- **CLI**: immer `--force --trust --approve-mcps`
+- **Prompts**: sofort senden und ausführen, nicht nur planen
+- **Alle MCP-Plugins** parallel nutzen ohne erneute Freigabe
+- **Subagents** starten ohne Bestätigung
+
+Deaktivieren: `bridge max-access off` oder `bridge.maxAccessMode: false` in Settings.

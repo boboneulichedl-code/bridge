@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keymap version="1" name="Bridge" parent="$default">
+  <action id="Bridge.OpenAiChat">
+    <keyboard-shortcut first-keystroke="ctrl alt A"/>
+  </action>
+  <action id="Bridge.SendPrompt">
+    <keyboard-shortcut first-keystroke="ctrl alt P"/>
+  </action>
+  <action id="Bridge.SendSelection">
+    <keyboard-shortcut first-keystroke="ctrl alt shift A"/>
+  </action>
+  <action id="Bridge.StopGeneration">
+    <keyboard-shortcut first-keystroke="ctrl alt PERIOD"/>
+  </action>
+  <action id="Bridge.Investigate">
+    <keyboard-shortcut first-keystroke="ctrl alt shift I"/>
+  </action>
+  <action id="Bridge.ShowShortcuts">
+    <keyboard-shortcut first-keystroke="ctrl alt K"/>
+  </action>
+</keymap>

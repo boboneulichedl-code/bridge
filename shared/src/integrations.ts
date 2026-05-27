@@ -1,0 +1,294 @@
+import type { IntegrationCategory, IntegrationDefinition } from "./types";
+
+/** Canonical catalog of integrations Bridge orchestrates with. */
+export const INTEGRATIONS: IntegrationDefinition[] = [
+  {
+    id: "agent-bridge",
+    name: "Agent Bridge",
+    categories: ["agent"],
+    mcpServerKeys: ["agent-bridge"],
+    authRequired: false,
+    setupHint: "Bundled with this plugin.",
+    tools: [
+      { name: "bridge_send_prompt", description: "Prompt an Cursor-Agent senden" },
+      { name: "bridge_investigate", description: "Multi-Source Debugging-Plan" },
+      { name: "bridge_route", description: "Intent → passende MCP-Tools" },
+      { name: "bridge_list_integrations", description: "Alle Integrationen + Status" },
+    ],
+  },
+  {
+    id: "git-local",
+    name: "Git (lokal)",
+    categories: ["git"],
+    mcpServerKeys: [],
+    builtin: true,
+    authRequired: false,
+    setupHint: "Kein Plugin — Agent nutzt Shell: git status, git diff, git log",
+    tools: [
+      { name: "Shell: git status", description: "Working tree Status" },
+      { name: "Shell: git diff", description: "Uncommitted changes" },
+      { name: "Shell: git log -10 --oneline", description: "Letzte Commits" },
+    ],
+  },
+  {
+    id: "github",
+    name: "GitHub",
+    categories: ["git", "errors"],
+    mcpServerKeys: ["github", "plugin-github-github"],
+    cursorPlugin: "github",
+    authRequired: true,
+    setupHint: "Cursor Marketplace → GitHub Plugin, oder github-mcp-server in mcp.json",
+    tools: [
+      {
+        name: "search_issues",
+        description: "Issues durchsuchen",
+        exampleArgs: { query: "is:open label:bug" },
+      },
+      {
+        name: "pull_request_read",
+        description: "PR Details, Diff, Reviews, Checks",
+        exampleArgs: { method: "get", owner: "org", repo: "repo", pullNumber: 1 },
+      },
+      {
+        name: "list_pull_requests",
+        description: "PRs auflisten",
+      },
+      {
+        name: "get_me",
+        description: "Authentifizierter User",
+      },
+    ],
+  },
+  {
+    id: "notion",
+    name: "Notion",
+    categories: ["tables"],
+    mcpServerKeys: ["notion", "notion-workspace", "plugin-notion-workspace-notion"],
+    cursorPlugin: "notion-workspace",
+    authRequired: true,
+    setupHint: "Cursor Marketplace → Notion Workspace, OAuth abschließen",
+    tools: [
+      {
+        name: "search",
+        description: "Notion-Workspace durchsuchen",
+        exampleArgs: { query: "Sprint tasks" },
+      },
+      {
+        name: "query_database",
+        description: "Datenbank/Tabellen abfragen",
+        exampleArgs: { databaseId: "...", filter: {} },
+      },
+      {
+        name: "fetch",
+        description: "Seite oder Datenbank laden",
+      },
+    ],
+  },
+  {
+    id: "linear",
+    name: "Linear",
+    categories: ["tables", "errors"],
+    mcpServerKeys: ["linear", "plugin-linear-linear"],
+    cursorPlugin: "linear",
+    authRequired: true,
+    setupHint: "Cursor Marketplace → Linear, OAuth abschließen",
+    tools: [
+      {
+        name: "list_issues",
+        description: "Issues als Tabelle",
+        exampleArgs: { teamId: "...", state: "open" },
+      },
+      {
+        name: "get_issue",
+        description: "Einzelnes Issue mit Details",
+      },
+      {
+        name: "search_issues",
+        description: "Issues suchen",
+      },
+    ],
+  },
+  {
+    id: "sentry",
+    name: "Sentry",
+    categories: ["errors", "logs"],
+    mcpServerKeys: ["sentry", "sentry-mcp"],
+    authRequired: true,
+    setupHint: "Sentry MCP Plugin oder getsentry/sentry-mcp in mcp.json",
+    tools: [
+      {
+        name: "search_issues",
+        description: "Production Errors suchen",
+        exampleArgs: { query: "is:unresolved" },
+      },
+      {
+        name: "get_issue_details",
+        description: "Stack trace, Impact, Events",
+      },
+      {
+        name: "find_projects",
+        description: "Projekte finden",
+      },
+    ],
+  },
+  {
+    id: "datadog",
+    name: "Datadog",
+    categories: ["logs", "errors"],
+    mcpServerKeys: ["datadog", "plugin-datadog-datadog"],
+    cursorPlugin: "datadog",
+    authRequired: true,
+    setupHint: "Cursor Marketplace → Datadog, DD_MCP_DOMAIN setzen",
+    tools: [
+      {
+        name: "query_logs",
+        description: "Logs abfragen",
+        exampleArgs: { query: "status:error service:api" },
+      },
+      {
+        name: "query_metrics",
+        description: "Metriken abfragen",
+      },
+      {
+        name: "list_monitors",
+        description: "Monitore / Alerts",
+      },
+    ],
+  },
+  {
+    id: "vercel",
+    name: "Vercel",
+    categories: ["deploy", "logs", "errors"],
+    mcpServerKeys: ["vercel", "plugin-vercel-vercel"],
+    cursorPlugin: "vercel",
+    authRequired: true,
+    setupHint: "Cursor Marketplace → Vercel Plugin",
+    tools: [
+      {
+        name: "list_deployments",
+        description: "Deployments auflisten",
+      },
+      {
+        name: "get_deployment_build_logs",
+        description: "Build-Fehler / CI-Logs",
+        exampleArgs: { deploymentId: "..." },
+      },
+      {
+        name: "get_runtime_logs",
+        description: "Runtime/Function Logs",
+        exampleArgs: { projectId: "..." },
+      },
+      {
+        name: "get_project",
+        description: "Projekt-Status",
+      },
+    ],
+  },
+  {
+    id: "browse",
+    name: "Browser (Browse)",
+    categories: ["browser", "errors"],
+    mcpServerKeys: ["browse", "plugin-browse-browser", "browser"],
+    cursorPlugin: "browse",
+    authRequired: false,
+    setupHint: "Cursor Marketplace → Browse",
+    tools: [
+      {
+        name: "browser_navigate",
+        description: "URL öffnen",
+        exampleArgs: { url: "https://..." },
+      },
+      {
+        name: "browser_snapshot",
+        description: "DOM / Accessibility Snapshot",
+      },
+      {
+        name: "browser_network",
+        description: "Netzwerk-Requests / Fehler",
+      },
+      {
+        name: "browser_console",
+        description: "Browser-Konsolen-Fehler (falls verfügbar)",
+      },
+    ],
+  },
+  {
+    id: "android",
+    name: "Android Pilot",
+    categories: ["android", "logs", "errors"],
+    mcpServerKeys: ["android-pilot"],
+    authRequired: false,
+    setupHint: "npx android-pilot-mcp in mcp.json, ADB + SDK installiert",
+    tools: [
+      {
+        name: "logcat_read",
+        description: "Logcat mit Filtern",
+        exampleArgs: { priority: "E", tag: "MyApp" },
+      },
+      {
+        name: "lint_run",
+        description: "Android Lint Fehlerliste",
+      },
+      {
+        name: "device_screenshot",
+        description: "Gerät-Screenshot",
+      },
+      {
+        name: "ui_dump",
+        description: "UI-Hierarchie",
+      },
+    ],
+  },
+  {
+    id: "launchdarkly",
+    name: "LaunchDarkly",
+    categories: ["flags"],
+    mcpServerKeys: ["launchdarkly", "plugin-launchdarkly-LaunchDarkly Feature Management"],
+    cursorPlugin: "launchdarkly",
+    authRequired: true,
+    setupHint: "Cursor Marketplace → LaunchDarkly",
+    tools: [
+      {
+        name: "list_feature_flags",
+        description: "Feature Flags auflisten",
+      },
+      {
+        name: "get_flag",
+        description: "Flag-Status und Targeting",
+      },
+    ],
+  },
+  {
+    id: "figma",
+    name: "Figma",
+    categories: ["design"],
+    mcpServerKeys: ["figma", "plugin-figma-figma"],
+    cursorPlugin: "figma",
+    authRequired: true,
+    setupHint: "Cursor Marketplace → Figma",
+    tools: [
+      { name: "get_design_context", description: "Design-Kontext für Code" },
+      { name: "get_screenshot", description: "Frame-Screenshot" },
+    ],
+  },
+  {
+    id: "ide-lints",
+    name: "IDE Diagnostics",
+    categories: ["errors"],
+    mcpServerKeys: [],
+    builtin: true,
+    authRequired: false,
+    setupHint: "Kein Plugin — Agent nutzt ReadLints Tool",
+    tools: [{ name: "ReadLints", description: "Linter/Compiler-Fehler im Workspace" }],
+  },
+];
+
+export function getIntegration(id: string): IntegrationDefinition | undefined {
+  return INTEGRATIONS.find((i) => i.id === id);
+}
+
+export function getIntegrationsByCategory(
+  category: IntegrationCategory
+): IntegrationDefinition[] {
+  return INTEGRATIONS.filter((i) => i.categories.includes(category));
+}

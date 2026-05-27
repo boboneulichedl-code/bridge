@@ -1,0 +1,20 @@
+{
+  "name": "bridge-cli",
+  "version": "1.0.0",
+  "description": "CLI zur Steuerung des Cursor-Agents",
+  "bin": {
+    "bridge": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "dev": "tsc -watch -p ."
+  },
+  "dependencies": {
+    "@bridge/shared": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "bridge-api",
+  "version": "2.2.0",
+  "private": true,
+  "description": "Bridge REST + WebSocket API",
+  "main": "./dist/server.js",
+  "bin": {
+    "bridge-api": "./dist/server.js"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "node dist/server.js",
+    "dev": "tsc -p . && node dist/server.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@bridge/shared": "*",
+    "@bridge/cursor-adapter": "*",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/ws": "^8.5.13",
+    "typescript": "^5.4.0",
+    "vitest": "^3.0.0"
+  }
+}

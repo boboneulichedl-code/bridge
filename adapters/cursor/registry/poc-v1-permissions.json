@@ -1,0 +1,22 @@
+{
+  "version": "p0-v1",
+  "defaultClientId": "bridge-default",
+  "clients": {
+    "bridge-default": {
+      "permissions": [
+        "read",
+        "workspace",
+        "fs-write",
+        "fs-delete",
+        "settings",
+        "extension-manage",
+        "terminal",
+        "command-exec",
+        "agent-run"
+      ]
+    },
+    "restricted-client": {
+      "permissions": ["read"]
+    }
+  }
+}

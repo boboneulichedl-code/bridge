@@ -1,0 +1,19 @@
+{
+  "version": "2.3.0",
+  "build": "2026-05-27T06:13:30.957Z",
+  "git": {},
+  "components": {
+    "root": "2.3.0",
+    "shared": "1.0.0",
+    "cli": "1.0.0",
+    "api": "2.2.0",
+    "web": "2.2.0",
+    "extension": "2.2.0",
+    "mcpServer": "1.0.0"
+  },
+  "api": {
+    "minClientVersion": "1.0.0",
+    "spec": "/api/v1",
+    "studioSpec": "/api/v1/studio"
+  }
+}

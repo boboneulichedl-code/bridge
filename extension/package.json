@@ -1,0 +1,185 @@
+{
+  "name": "cursor-agent-bridge",
+  "displayName": "Agent Bridge",
+  "description": "Steuere den Cursor-Agent per Tastenkürzel und Befehle",
+  "version": "2.2.0",
+  "publisher": "coreai",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "bridge.openAgentChat",
+        "title": "Agent-Chat öffnen",
+        "category": "Bridge"
+      },
+      {
+        "command": "bridge.openComposer",
+        "title": "Composer öffnen",
+        "category": "Bridge"
+      },
+      {
+        "command": "bridge.openComposerFullscreen",
+        "title": "Composer Vollbild",
+        "category": "Bridge"
+      },
+      {
+        "command": "bridge.sendPrompt",
+        "title": "Prompt senden…",
+        "category": "Bridge"
+      },
+      {
+        "command": "bridge.sendSelectionToAgent",
+        "title": "Auswahl an Agent senden",
+        "category": "Bridge"
+      },
+      {
+        "command": "bridge.stopGeneration",
+        "title": "Generierung stoppen",
+        "category": "Bridge"
+      },
+      {
+        "command": "bridge.showShortcuts",
+        "title": "Tastenkürzel anzeigen",
+        "category": "Bridge"
+      },
+      {
+        "command": "bridge.discoverCommands",
+        "title": "Cursor-Befehle entdecken",
+        "category": "Bridge"
+      },
+      {
+        "command": "bridge.openChat",
+        "title": "Chat öffnen",
+        "category": "Bridge"
+      },
+      {
+        "command": "bridge.newChat",
+        "title": "Neuer Chat",
+        "category": "Bridge"
+      },
+      {
+        "command": "bridge.showIntegrations",
+        "title": "Integrationen anzeigen",
+        "category": "Bridge"
+      },
+      {
+        "command": "bridge.investigate",
+        "title": "Multi-Source Untersuchung…",
+        "category": "Bridge"
+      },
+      {
+        "command": "bridge.toggleMaxAccess",
+        "title": "Max Access umschalten",
+        "category": "Bridge"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "bridge.openAgentChat",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a"
+      },
+      {
+        "command": "bridge.sendPrompt",
+        "key": "ctrl+alt+p",
+        "mac": "cmd+alt+p"
+      },
+      {
+        "command": "bridge.sendSelectionToAgent",
+        "key": "ctrl+alt+shift+a",
+        "mac": "cmd+alt+shift+a"
+      },
+      {
+        "command": "bridge.stopGeneration",
+        "key": "ctrl+alt+.",
+        "mac": "cmd+alt+."
+      },
+      {
+        "command": "bridge.showShortcuts",
+        "key": "ctrl+alt+k",
+        "mac": "cmd+alt+k"
+      },
+      {
+        "command": "bridge.investigate",
+        "key": "ctrl+alt+shift+i",
+        "mac": "cmd+alt+shift+i"
+      },
+      {
+        "command": "bridge.openComposer",
+        "key": "ctrl+alt+i",
+        "mac": "cmd+alt+i",
+        "when": "!bridge.useNativeComposerShortcut"
+      }
+    ],
+    "configuration": {
+      "title": "Agent Bridge",
+      "properties": {
+        "bridge.autoSubmitPrompt": {
+          "type": "boolean",
+          "default": true,
+          "description": "Prompt nach dem Einfügen automatisch absenden. Standard AN bei Max Access."
+        },
+        "bridge.maxAccessMode": {
+          "type": "boolean",
+          "default": true,
+          "description": "Maximaler Agent-Zugriff: Auto-Submit, aggressive Submit-Versuche, Hooks für Auto-Allow."
+        },
+        "bridge.autoUpdate": {
+          "type": "boolean",
+          "default": true,
+          "description": "Bei Plugin-Änderungen automatisch updaten (build + Version-Lock)."
+        },
+        "bridge.updateCheckIntervalMinutes": {
+          "type": "number",
+          "default": 30,
+          "description": "Intervall für Update-Checks in Minuten (0 = aus)."
+        },
+        "bridge.apiPort": {
+          "type": "number",
+          "default": 3847,
+          "description": "Port für Bridge API + Mobile Web UI."
+        },
+        "bridge.promptPasteDelayMs": {
+          "type": "number",
+          "default": 150,
+          "description": "Wartezeit (ms) vor Clipboard-Einfügen in den Chat."
+        },
+        "bridge.useNativeComposerShortcut": {
+          "type": "boolean",
+          "default": true,
+          "description": "Native Ctrl+I für Composer nutzen (Bridge überschreibt nicht)."
+        },
+        "bridge.ideControl.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Localhost IDE-Control-Host für Bridge API aktivieren."
+        },
+        "bridge.ideControl.port": {
+          "type": "number",
+          "default": 3848,
+          "description": "Port für IDE-Control IPC (127.0.0.1 only)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "vitest run",
+    "watch": "tsc -watch -p .",
+    "package": "vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "@bridge/shared": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0",
+    "vitest": "^3.0.0"
+  }
+}

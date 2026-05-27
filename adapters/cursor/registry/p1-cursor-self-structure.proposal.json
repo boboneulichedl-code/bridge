@@ -1,0 +1,360 @@
+{
+  "schemaVersion": "p1-proposal-v1",
+  "proposalOnly": true,
+  "runtimeActive": false,
+  "adapterId": "cursor",
+  "adapterName": "Cursor",
+  "description": "P1 proposal: how Cursor describes itself to Bridge. NOT loaded by load-registry.ts.",
+  "bridgeRole": "ide-program-control",
+  "cursorRole": "first-adapter-not-whole-system",
+  "targetProgram": {
+    "programId": "cursor",
+    "displayName": "Cursor",
+    "basePlatform": "vscode-fork",
+    "versionSource": "extension-ipc-health",
+    "compatibilityField": "supportedCursorVersions",
+    "defaultVersionRange": ">=2.0.0"
+  },
+  "sources": [
+    {
+      "sourceId": "poc-v1-actions",
+      "type": "runtime-registry",
+      "path": "adapters/cursor/registry/poc-v1-actions.json",
+      "registryVersion": "poc-v1.1.0",
+      "note": "Authoritative for implemented actions only"
+    },
+    {
+      "sourceId": "poc-v1-commands",
+      "type": "runtime-registry",
+      "path": "adapters/cursor/registry/poc-v1-commands.json"
+    },
+    {
+      "sourceId": "poc-v1-terminal-whitelist",
+      "type": "runtime-registry",
+      "path": "adapters/cursor/registry/poc-v1-terminal-whitelist.json"
+    },
+    {
+      "sourceId": "poc-v1-permissions",
+      "type": "runtime-registry",
+      "path": "adapters/cursor/registry/poc-v1-permissions.json"
+    },
+    {
+      "sourceId": "p1-docs",
+      "type": "documentation",
+      "paths": [
+        "docs/adapters/cursor/poc-v1-spec.md",
+        "docs/adapters/cursor/p0-completion-report.md",
+        "docs/adapters/cursor/p1-control-domains.md",
+        "docs/adapters/cursor/p1-communication-model.md"
+      ]
+    }
+  ],
+  "subsystems": [
+    {
+      "subsystemId": "cursor.subsystem.agent",
+      "name": "Cursor Agent / Composer",
+      "primaryPurpose": false,
+      "parentAdapter": "cursor",
+      "domain": "agent",
+      "description": "AI prompt subsystem — not representative of Bridge as a whole"
+    }
+  ],
+  "domains": [
+    { "domainId": "cursor.domain.ide.status", "name": "IDE Status", "owner": "ide", "phase": "P1" },
+    { "domainId": "cursor.domain.workspace", "name": "Workspace", "owner": "ide", "phase": "P1" },
+    { "domainId": "cursor.domain.fs", "name": "File System", "owner": "ide", "phase": "P1" },
+    { "domainId": "cursor.domain.editor", "name": "Editor", "owner": "ide", "phase": "P1" },
+    { "domainId": "cursor.domain.settings", "name": "Settings", "owner": "ide", "phase": "P1" },
+    { "domainId": "cursor.domain.extensions", "name": "Extensions", "owner": "ide", "phase": "P1" },
+    { "domainId": "cursor.domain.terminal", "name": "Terminal", "owner": "ide", "phase": "P1" },
+    { "domainId": "cursor.domain.commands", "name": "Commands", "owner": "ide", "phase": "P1" },
+    { "domainId": "cursor.domain.panels", "name": "Panels", "owner": "ide", "phase": "P1" },
+    { "domainId": "cursor.domain.git", "name": "Git", "owner": "cross-cutting", "phase": "P1" },
+    { "domainId": "cursor.domain.problems", "name": "Problems", "owner": "ide", "phase": "P1" },
+    { "domainId": "cursor.domain.tasks", "name": "Tasks", "owner": "ide", "phase": "P1" },
+    { "domainId": "cursor.domain.agent", "name": "Agent", "owner": "agent-subsystem", "phase": "P1", "subsystem": true },
+    { "domainId": "cursor.domain.audit", "name": "Audit", "owner": "bridge", "phase": "P1" },
+    { "domainId": "cursor.domain.permissions", "name": "Permissions", "owner": "cross-cutting", "phase": "P1" },
+    { "domainId": "cursor.domain.version", "name": "Version", "owner": "bridge", "phase": "P1" },
+    { "domainId": "cursor.domain.interface-reader", "name": "Interface Reader", "owner": "bridge", "phase": "P1-concept-later-impl" }
+  ],
+  "surfaces": [
+    {
+      "surfaceId": "cursor.surface.editor",
+      "name": "Editor Area",
+      "observationLevelP0": "api",
+      "readableP0": true,
+      "source": "cursor.ide.status.get"
+    },
+    {
+      "surfaceId": "cursor.surface.sidebar.explorer",
+      "name": "Explorer",
+      "observationLevelP0": "inferred",
+      "readableP0": false,
+      "focusableP0": "cursor.ide.command.execute:workbench.view.explorer"
+    },
+    {
+      "surfaceId": "cursor.surface.sidebar.scm",
+      "name": "SCM",
+      "observationLevelP0": "inferred",
+      "readableP0": false,
+      "focusableP0": "cursor.ide.command.execute:workbench.view.scm"
+    },
+    {
+      "surfaceId": "cursor.surface.sidebar.problems",
+      "name": "Problems",
+      "observationLevelP0": "api-partial",
+      "readableP0": "counts-only",
+      "focusableP0": "cursor.ide.command.execute:workbench.actions.view.problems"
+    },
+    {
+      "surfaceId": "cursor.surface.panel.terminal",
+      "name": "Terminal",
+      "observationLevelP0": "api-partial",
+      "readableP0": "count-and-names",
+      "focusableP0": "cursor.ide.command.execute:workbench.action.terminal.new"
+    },
+    {
+      "surfaceId": "cursor.surface.agent.composer",
+      "name": "Agent Composer",
+      "observationLevelP0": "unreliable",
+      "readableP0": false,
+      "subsystem": "cursor.subsystem.agent"
+    }
+  ],
+  "capabilities": [
+    { "method": "extension-api", "status": "implemented", "phase": "P0" },
+    { "method": "extension-command", "status": "implemented", "phase": "P0" },
+    { "method": "cli", "status": "implemented", "phase": "P0" },
+    { "method": "filesystem", "status": "implemented", "phase": "P0", "guard": "path-allowlist" },
+    { "method": "composite", "status": "proposed", "phase": "P0.1" },
+    { "method": "surface-read", "status": "proposed", "phase": "later" }
+  ],
+  "actions": [
+    {
+      "actionId": "cursor.ide.status.get",
+      "status": "implemented",
+      "phase": "P0",
+      "domain": "ide",
+      "domainId": "cursor.domain.ide.status",
+      "method": "extension-api",
+      "rollbackAvailable": false
+    },
+    {
+      "actionId": "cursor.ide.workspace.open",
+      "status": "implemented",
+      "phase": "P0",
+      "domain": "ide",
+      "domainId": "cursor.domain.workspace",
+      "method": "extension-api",
+      "rollbackPossible": true,
+      "rollbackAvailable": false
+    },
+    {
+      "actionId": "cursor.ide.fs.mkdir",
+      "status": "implemented",
+      "phase": "P0",
+      "domain": "ide",
+      "domainId": "cursor.domain.fs",
+      "method": "extension-api",
+      "rollbackPossible": true,
+      "rollbackAvailable": false
+    },
+    {
+      "actionId": "cursor.ide.fs.write",
+      "status": "implemented",
+      "phase": "P0",
+      "domain": "ide",
+      "domainId": "cursor.domain.fs",
+      "method": "extension-api",
+      "rollbackPossible": true,
+      "rollbackAvailable": false
+    },
+    {
+      "actionId": "cursor.ide.settings.get",
+      "status": "implemented",
+      "phase": "P0",
+      "domain": "ide",
+      "domainId": "cursor.domain.settings",
+      "method": "extension-api",
+      "rollbackAvailable": false
+    },
+    {
+      "actionId": "cursor.ide.settings.set",
+      "status": "implemented",
+      "phase": "P0",
+      "domain": "ide",
+      "domainId": "cursor.domain.settings",
+      "method": "extension-api",
+      "rollbackPossible": true,
+      "rollbackAvailable": false
+    },
+    {
+      "actionId": "cursor.ide.extension.install",
+      "status": "implemented",
+      "phase": "P0",
+      "domain": "ide",
+      "domainId": "cursor.domain.extensions",
+      "method": "extension-command",
+      "externalCode": true,
+      "rollbackPossible": true,
+      "rollbackAvailable": false
+    },
+    {
+      "actionId": "cursor.ide.terminal.run",
+      "status": "implemented",
+      "phase": "P0",
+      "domain": "ide",
+      "domainId": "cursor.domain.terminal",
+      "method": "extension-api",
+      "rollbackAvailable": false
+    },
+    {
+      "actionId": "cursor.ide.command.execute",
+      "status": "implemented",
+      "phase": "P0",
+      "domain": "ide",
+      "domainId": "cursor.domain.commands",
+      "method": "extension-command",
+      "rollbackAvailable": false
+    },
+    {
+      "actionId": "cursor.agent.prompt.send",
+      "status": "implemented",
+      "phase": "P0",
+      "domain": "agent",
+      "domainId": "cursor.domain.agent",
+      "subsystem": "cursor.subsystem.agent",
+      "method": "cli",
+      "rollbackAvailable": false
+    },
+    {
+      "actionId": "cursor.ide.settings.rollback",
+      "status": "proposed",
+      "phase": "P0.1",
+      "domain": "ide",
+      "domainId": "cursor.domain.settings"
+    },
+    {
+      "actionId": "cursor.snapshots.restore",
+      "status": "proposed",
+      "phase": "P0.1",
+      "domain": "ide",
+      "domainId": "cursor.domain.workspace",
+      "note": "API returns 501 ROLLBACK_NOT_AVAILABLE in P0"
+    },
+    {
+      "actionId": "cursor.ide.fs.delete",
+      "status": "proposed",
+      "phase": "P0.1",
+      "domainId": "cursor.domain.fs"
+    },
+    {
+      "actionId": "cursor.ide.panel.focus",
+      "status": "proposed",
+      "phase": "P0.1",
+      "domainId": "cursor.domain.panels"
+    },
+    {
+      "actionId": "cursor.ide.surface.get",
+      "status": "proposed",
+      "phase": "P2",
+      "domainId": "cursor.domain.interface-reader"
+    },
+    {
+      "actionId": "cursor.ide.git.commit",
+      "status": "proposed",
+      "phase": "later",
+      "domainId": "cursor.domain.git"
+    }
+  ],
+  "uiModuleCandidates": [
+    { "moduleId": "bridge.ui.cursor.status", "proposalRef": "p1-ui-modules.proposal.json" },
+    { "moduleId": "bridge.ui.workspace", "proposalRef": "p1-ui-modules.proposal.json" },
+    { "moduleId": "bridge.ui.agent.prompt", "proposalRef": "p1-ui-modules.proposal.json", "subsystem": true }
+  ],
+  "events": [
+    {
+      "eventId": "cursor.action.done",
+      "status": "implemented",
+      "phase": "P0",
+      "transport": "websocket",
+      "channel": "channel.ws.events.clients"
+    },
+    {
+      "eventId": "cursor.ide.status.changed",
+      "status": "proposed",
+      "phase": "P2"
+    },
+    {
+      "eventId": "cursor.surface.changed",
+      "status": "proposed",
+      "phase": "later"
+    }
+  ],
+  "riskClasses": [
+    { "riskClass": "read", "description": "Read-only operations", "auditMark": true },
+    { "riskClass": "destructive", "description": "Shell/commands/agent file changes", "auditMark": true },
+    { "riskClass": "external-code", "description": "Third-party extension install", "auditMark": true, "actions": ["cursor.ide.extension.install"] }
+  ],
+  "permissions": [
+    { "permission": "read", "phase": "P0" },
+    { "permission": "workspace", "phase": "P0" },
+    { "permission": "fs-write", "phase": "P0" },
+    { "permission": "fs-delete", "phase": "P0-registry-only", "note": "In permissions.json but no delete action in P0" },
+    { "permission": "settings", "phase": "P0" },
+    { "permission": "extension-manage", "phase": "P0" },
+    { "permission": "terminal", "phase": "P0" },
+    { "permission": "command-exec", "phase": "P0" },
+    { "permission": "agent-run", "phase": "P0", "subsystem": true },
+    { "permission": "surface-read", "status": "proposed", "phase": "later" }
+  ],
+  "communicationChannels": [
+    { "channelId": "channel.rest.client.bridge-api", "phase": "P0" },
+    { "channelId": "channel.ws.events.clients", "phase": "P0-partial" },
+    { "channelId": "channel.api.security-gate", "phase": "P0" },
+    { "channelId": "channel.api.capability-router", "phase": "P0" },
+    { "channelId": "channel.router.extension-executor", "phase": "P0" },
+    { "channelId": "channel.router.cli-executor", "phase": "P0" },
+    { "channelId": "channel.router.filesystem-executor", "phase": "P0" },
+    { "channelId": "channel.extension.ipc.vscode-api", "phase": "P0" },
+    { "channelId": "channel.api.audit", "phase": "P0" },
+    { "channelId": "channel.api.snapshots", "phase": "P0-create" },
+    { "channelId": "channel.future.modular-ui-renderer", "phase": "P2" },
+    { "channelId": "channel.future.interface-reader.bridge-api", "phase": "later" }
+  ],
+  "stateSources": [
+    { "source": "extension-api", "priority": 1, "phase": "P0" },
+    { "source": "cli", "priority": 2, "phase": "P0", "degraded": true },
+    { "source": "filesystem", "priority": 3, "phase": "P0", "guard": "allowlist" },
+    { "source": "interface-reader", "priority": 4, "phase": "later", "status": "proposed" }
+  ],
+  "unsupportedAreas": [
+    { "area": "snapshot-restore", "reason": "P0 returns 501 ROLLBACK_NOT_AVAILABLE", "phase": "P0.1" },
+    { "area": "free-terminal-commands", "reason": "Exact whitelist only in P0", "phase": "P0.1" },
+    { "area": "agent-extension-ipc-fallback", "reason": "Rejected in Extension IPC for P0", "phase": "P0.1" },
+    { "area": "interface-reader-runtime", "reason": "P1 concept only", "phase": "later" },
+    { "area": "gui-automation", "reason": "Not P1; security and fragility", "phase": "later" },
+    { "area": "vision-ocr", "reason": "Not P1; privacy", "phase": "later" },
+    { "area": "monolithic-control-ui", "reason": "Architecture forbidden by spec", "phase": "never" }
+  ],
+  "futureAreas": [
+    { "area": "modular-ui-renderer", "phase": "P2" },
+    { "area": "permission-gate-ui", "phase": "P2" },
+    { "area": "designrules-and-tokens", "phase": "P2", "blockedBy": "missing-in-repo" },
+    { "area": "multi-adapter-reuse", "phase": "P2+", "targets": ["vscode", "android-studio", "chrome", "terminal", "powershell"] },
+    { "area": "poc-v1-ui-modules-runtime", "phase": "P1.1", "promoteFrom": "p1-ui-modules.proposal.json" }
+  ],
+  "reuseAcrossPrograms": {
+    "pattern": "adapter-agnostic domains + bridge.ui.* modules",
+    "firstAdapter": "cursor",
+    "notWholeSystem": true,
+    "targets": [
+      { "programId": "vscode", "reuseLevel": "high", "note": "Same Extension API surface" },
+      { "programId": "android-studio", "reuseLevel": "medium", "note": "IDE control + plugins" },
+      { "programId": "chrome", "reuseLevel": "medium", "note": "Tabs/extensions not workbench" },
+      { "programId": "terminal", "reuseLevel": "medium", "note": "Commands only domain" },
+      { "programId": "powershell", "reuseLevel": "medium", "note": "Script/run domain" }
+    ]
+  }
+}

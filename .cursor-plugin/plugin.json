@@ -1,0 +1,11 @@
+{
+  "name": "bridge",
+  "displayName": "Agent Bridge",
+  "version": "2.2.0",
+  "description": "Orchestrierungs-Hub: Agent-Steuerung + MCP-Plugins (GitHub, Notion, Sentry, Datadog, …).",
+  "author": {
+    "name": "CoreAI"
+  },
+  "license": "MIT",
+  "keywords": ["agent", "cli", "keyboard", "shortcuts", "composer", "bridge", "mcp"]
+}

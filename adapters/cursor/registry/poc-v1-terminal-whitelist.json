@@ -1,0 +1,12 @@
+{
+  "version": "p0-v1",
+  "matchMode": "exact",
+  "allowedCommands": [
+    "npm run build",
+    "npm test",
+    "npm run test",
+    "git status",
+    "git diff",
+    "git log"
+  ]
+}

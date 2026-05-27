@@ -1,0 +1,22 @@
+services:
+  bridge-api:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    container_name: bridge-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - chatpilot-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3847/api/v1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 25s
+
+networks:
+  chatpilot-net:
+    external: true
+    name: chatpilot-link-sync_chatpilot-net

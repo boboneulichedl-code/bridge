@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "agent-bridge": {
+      "command": "node",
+      "args": ["${workspaceFolder}/mcp-server/dist/index.js"]
+    },
+    "android-pilot": {
+      "command": "npx",
+      "args": ["-y", "android-pilot-mcp"]
+    }
+  }
+}

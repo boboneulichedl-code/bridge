@@ -1,0 +1,20 @@
+node_modules/
+dist/
+*.vsix
+.DS_Store
+*.log
+
+.env
+.env.*
+!.env.example
+Thumbs.db
+Desktop.ini
+.cursor/plans/
+coverage/
+*.tsbuildinfo
+
+# Review / temp exports (not product source)
+chatgpt_files/
+
+# Electron-builder output (overlay; distinct from tsc dist/)
+overlay/bridge-overlay/release/

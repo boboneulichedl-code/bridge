@@ -1,0 +1,46 @@
+{
+  "name": "bridge-overlay",
+  "version": "1.0.0",
+  "description": "AI-gesteuertes GUI-Overlay — spiegelt fremde Apps, cached Layout, Bridge-Ansteuerung",
+  "main": "dist/main.js",
+  "author": "CoreAI",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "npm run build && electron .",
+    "pack": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder --win portable",
+    "install-local": "npm run build && node dist/installer-cli.js"
+  },
+  "build": {
+    "appId": "com.coreai.bridge.overlay",
+    "productName": "Bridge Overlay",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "assets/**/*",
+      "scripts/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      { "from": "scripts", "to": "scripts" },
+      { "from": "assets", "to": "assets" }
+    ],
+    "win": {
+      "target": ["portable", "dir"],
+      "artifactName": "BridgeOverlay-${version}.exe",
+      "signAndEditExecutable": false
+    },
+    "portable": {
+      "artifactName": "BridgeOverlay-${version}.exe"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "electron": "^34.0.0",
+    "electron-builder": "^25.1.8",
+    "typescript": "^5.4.0"
+  }
+}

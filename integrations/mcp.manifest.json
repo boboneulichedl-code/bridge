@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "agent-bridge": {
+      "command": "node",
+      "args": ["${BRIDGE_ROOT}/mcp-server/dist/index.js"],
+      "env": {
+        "BRIDGE_MAX_ACCESS": "1"
+      }
+    },
+    "android-pilot": {
+      "command": "npx",
+      "args": ["-y", "android-pilot-mcp"],
+      "env": {}
+    },
+    "sentry": {
+      "url": "https://mcp.sentry.dev/mcp",
+      "headers": {}
+    },
+    "github": {
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {}
+    }
+  },
+  "_comment": "Marketplace-Plugins (Notion, Linear, Vercel, Datadog, Browse, Figma, LaunchDarkly) werden über Cursor Settings → Plugins installiert und brauchen keinen Eintrag hier. Kopiere agent-bridge args und ersetze ${BRIDGE_ROOT} mit dem absoluten Pfad zu diesem Repo."
+}
