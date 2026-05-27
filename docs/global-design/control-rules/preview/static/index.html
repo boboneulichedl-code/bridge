@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Control Design Preview — NOT PRODUCT UI</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body class="preview-page">
+  <div id="preview-banner" class="preview-banner" role="status">
+    NOT PRODUCT UI — Global Control Design Review Only
+  </div>
+
+  <header class="preview-meta">
+    <h1>Global Control Design Review Gallery</h1>
+    <p>Not Bridge Mobile App — review artifact for global control UI rules (Bridge is first use case).</p>
+    <dl>
+      <dt>schemaVersion</dt><dd>control-tokens-1.0.0</dd>
+      <dt>colorPresetId</dt><dd>neutral-blue-gray (Review Defaults — not CoreAI brand)</dd>
+      <dt>elevationProfileId</dt><dd>elevation-profile-a</dd>
+      <dt>deviceProfileId</dt><dd>device-profile-default-a</dd>
+      <dt>effectProfileId</dt><dd>effect-profile-default-a</dd>
+    </dl>
+    <p><a href="../../global-control-design-index.md">Rules index</a> · <a href="../global-control-design-preview-spec.md">Preview spec (D0b)</a> · <a href="../../tokens/control.tokens.json">control.tokens.json</a></p>
+  </header>
+
+  <nav class="preview-nav" aria-label="Preview sections">
+    <a href="#S01">S01</a><a href="#S02">S02</a><a href="#S03">S03</a><a href="#S04">S04</a>
+    <a href="#S05">S05</a><a href="#S06">S06</a><a href="#S07">S07</a><a href="#S08">S08</a>
+    <a href="#S09">S09</a><a href="#S10">S10</a><a href="#S11">S11</a><a href="#S12">S12</a>
+    <a href="#S13">S13</a><a href="#S14">S14</a><a href="#S15">S15</a><a href="#S16">S16</a>
+    <a href="#S17">S17</a>
+  </nav>
+
+  <main class="preview-main">
+
+    <!-- S01 -->
+    <section class="preview-section" id="S01" data-section="S01">
+      <a class="rule-link" href="../../global-base-design-rules.md">global-base-design-rules.md</a>
+      <h2>S01 — Color / Token</h2>
+      <p class="purpose">Semantic color roles and token IDs — Review Defaults (not CoreAI brand).</p>
+      <div class="token-grid">
+        <div class="token-swatch token-swatch--bg"><div class="token-swatch__color"></div><div class="token-swatch__label">control.color.bg</div></div>
+        <div class="token-swatch token-swatch--surface"><div class="token-swatch__color"></div><div class="token-swatch__label">control.color.surface</div></div>
+        <div class="token-swatch token-swatch--surface-elevated"><div class="token-swatch__color"></div><div class="token-swatch__label">control.color.surfaceElevated</div></div>
+        <div class="token-swatch token-swatch--text"><div class="token-swatch__color"></div><div class="token-swatch__label">control.color.text</div></div>
+        <div class="token-swatch token-swatch--text-muted"><div class="token-swatch__color"></div><div class="token-swatch__label">control.color.textMuted</div></div>
+        <div class="token-swatch token-swatch--accent"><div class="token-swatch__color"></div><div class="token-swatch__label">control.color.accent</div></div>
+        <div class="token-swatch token-swatch--accent-muted"><div class="token-swatch__color"></div><div class="token-swatch__label">control.color.accentMuted</div></div>
+        <div class="token-swatch token-swatch--ok"><div class="token-swatch__color"></div><div class="token-swatch__label">control.color.ok</div></div>
+        <div class="token-swatch token-swatch--warn"><div class="token-swatch__color"></div><div class="token-swatch__label">control.color.warn</div></div>
+        <div class="token-swatch token-swatch--danger"><div class="token-swatch__color"></div><div class="token-swatch__label">control.color.danger</div></div>
+        <div class="token-swatch token-swatch--border"><div class="token-swatch__color"></div><div class="token-swatch__label">control.color.border</div></div>
+        <div class="token-swatch token-swatch--focus"><div class="token-swatch__color"></div><div class="token-swatch__label">control.color.focus</div></div>
+      </div>
+      <ul class="review-checklist">
+        <li>All control.color.* roles visible</li>
+        <li>danger ≠ warn</li>
+        <li>Dark background default</li>
+      </ul>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S02 -->
+    <section class="preview-section" id="S02" data-section="S02">
+      <a class="rule-link" href="../../global-base-design-rules.md">global-base-design-rules.md</a>
+      <h2>S02 — Typography</h2>
+      <p class="purpose">Typography scale and hierarchy.</p>
+      <div class="type-sample type-caption">caption — control.type.caption</div>
+      <div class="type-sample type-body">body — control.type.body — The quick brown fox.</div>
+      <div class="type-sample type-label">label — control.type.label — ACTION LABEL</div>
+      <div class="type-sample type-title">title — control.type.title — Module title</div>
+      <div class="type-sample type-headline">headline — control.type.headline — Screen headline</div>
+      <div class="type-sample type-mono">mono — actionId: bridge.ui.terminal.command.run</div>
+      <ul class="review-checklist">
+        <li>Max 3 weights visible</li>
+        <li>Mono only for code/hash</li>
+      </ul>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S03 -->
+    <section class="preview-section" id="S03" data-section="S03">
+      <a class="rule-link" href="../../global-base-design-rules.md">global-base-design-rules.md</a>
+      <h2>S03 — Spacing</h2>
+      <p class="purpose">8px grid and module spacing.</p>
+      <div class="spacing-scale">
+        <div class="spacing-bar"><span class="type-caption">xs</span><div class="spacing-bar__block spacing-bar__block--xs"></div></div>
+        <div class="spacing-bar"><span class="type-caption">sm</span><div class="spacing-bar__block spacing-bar__block--sm"></div></div>
+        <div class="spacing-bar"><span class="type-caption">md</span><div class="spacing-bar__block spacing-bar__block--md"></div></div>
+        <div class="spacing-bar"><span class="type-caption">lg</span><div class="spacing-bar__block spacing-bar__block--lg"></div></div>
+        <div class="spacing-bar"><span class="type-caption">xl</span><div class="spacing-bar__block spacing-bar__block--xl"></div></div>
+      </div>
+      <div class="spacing-demo-modules">
+        <div class="spacing-demo-module">Module A (inner padding md)</div>
+        <div class="spacing-demo-module">Module B (gap lg between modules)</div>
+      </div>
+      <ul class="review-checklist">
+        <li>xs–xl labeled</li>
+        <li>Touch targets not shrunk by spacing</li>
+      </ul>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S04 -->
+    <section class="preview-section" id="S04" data-section="S04">
+      <a class="rule-link" href="../../global-base-design-rules.md">global-base-design-rules.md</a>
+      <h2>S04 — Radius / Surface</h2>
+      <p class="purpose">Surface hierarchy and elevation.</p>
+      <div class="surface-row">
+        <div class="surface-card">Card — radius.lg, shadow.raised</div>
+        <div class="surface-card surface-card--flat">Flat surface — shadow.none</div>
+        <div class="surface-card surface-card--elevated">Elevated surface</div>
+        <div class="surface-dialog-mock">Dialog mock — radius.xl, shadow.overlay</div>
+        <div class="border-demo border-demo--subtle">Border subtle</div>
+        <div class="border-demo border-demo--strong">Border strong</div>
+      </div>
+      <ul class="review-checklist">
+        <li>Card vs Dialog distinguishable</li>
+      </ul>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S05 -->
+    <section class="preview-section" id="S05" data-section="S05">
+      <a class="rule-link" href="../../global-control-design-rules.md">global-control-design-rules.md</a>
+      <h2>S05 — Button / Action States</h2>
+      <p class="purpose">Interactive controls — min 48×48 dp MUST.</p>
+      <div class="btn-row">
+        <button type="button" class="btn btn--primary">Primary</button>
+        <button type="button" class="btn btn--secondary">Secondary</button>
+        <button type="button" class="btn btn--danger">Danger</button>
+        <button type="button" class="btn btn--disabled" disabled>Disabled</button>
+        <button type="button" class="btn btn--primary btn--loading" aria-busy="true">Loading</button>
+      </div>
+      <p class="type-caption">Pressed state: described in rules (not interactive in static preview).</p>
+      <ul class="review-checklist">
+        <li>48×48 dp minimum height</li>
+        <li>danger CTA not used for normal actions</li>
+      </ul>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S06 -->
+    <section class="preview-section" id="S06" data-section="S06">
+      <a class="rule-link" href="../../global-state-display-rules.md">global-state-display-rules.md</a>
+      <h2>S06 — Status States (Gallery)</h2>
+      <p class="purpose">All 17 stateIds visible with icon + text + color role.</p>
+      <div class="state-gallery">
+        <div class="state-panel state-panel--loading"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9" stroke-dasharray="40 20"/></svg><div><p class="state-panel__title">loading</p><p class="state-panel__text">Loading…</p></div></div>
+        <div class="state-panel state-panel--empty"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="16" height="12" rx="2"/></svg><div><p class="state-panel__title">empty</p><p class="state-panel__text">No data yet</p></div></div>
+        <div class="state-panel state-panel--success"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5 9-10"/></svg><div><p class="state-panel__title">success</p><p class="state-panel__text">Action completed</p></div></div>
+        <div class="state-panel state-panel--warning"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4l10 18H2z"/><line x1="12" y1="10" x2="12" y2="14"/></svg><div><p class="state-panel__title">warning</p><p class="state-panel__text">Review required</p></div></div>
+        <div class="state-panel state-panel--error"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="8" y1="8" x2="16" y2="16"/></svg><div><p class="state-panel__title">error</p><p class="state-panel__text">Something failed</p></div></div>
+        <div class="state-panel state-panel--blocked"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg><div><p class="state-panel__title">blocked</p><p class="state-panel__text">Action blocked</p></div></div>
+        <div class="state-panel state-panel--disabled"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="6" y1="12" x2="18" y2="12"/></svg><div><p class="state-panel__title">disabled</p><p class="state-panel__text">Control disabled — hint why</p></div></div>
+        <div class="state-panel state-panel--offline"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h4M18 12h4M8 12h8"/></svg><div><p class="state-panel__title">offline</p><p class="state-panel__text">Network unavailable</p></div></div>
+        <div class="state-panel state-panel--unreachable"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l16 16M8 8h8v8"/></svg><div><p class="state-panel__title">unreachable</p><p class="state-panel__text">Extension/API down</p></div></div>
+        <div class="state-panel state-panel--running"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="8,6 18,12 8,18"/></svg><div><p class="state-panel__title">running</p><p class="state-panel__text">In progress…</p></div></div>
+        <div class="state-panel state-panel--failed"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v8M12 16v2"/></svg><div><p class="state-panel__title">failed</p><p class="state-panel__text">Failed — retry if meaningful</p></div></div>
+        <div class="state-panel state-panel--partial-success"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h6M13 12h6M5 16h14"/></svg><div><p class="state-panel__title">partial success</p><p class="state-panel__text">Some steps OK, some not</p></div></div>
+        <div class="state-panel state-panel--confirmation-required"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4M12 16h.01"/></svg><div><p class="state-panel__title">confirmation required</p><p class="state-panel__text">Confirm before continue</p></div></div>
+        <div class="state-panel state-panel--permission-denied"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M9 9l6 6"/></svg><div><p class="state-panel__title">permission denied</p><p class="state-panel__text">Missing permission: workspace.write</p></div></div>
+        <div class="state-panel state-panel--external-code-warning"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4h8l2 4v12H6V8z"/></svg><div><p class="state-panel__title">external-code warning</p><p class="state-panel__text">External code install risks</p></div></div>
+        <div class="state-panel state-panel--restore-available"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 0114-5M20 12a8 8 0 01-14 5"/></svg><div><p class="state-panel__title">restore available</p><p class="state-panel__text">snapshotId: snap-7f3a</p></div></div>
+        <div class="state-panel state-panel--restore-unavailable"><svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v8M8 12h8"/></svg><div><p class="state-panel__title">restore unavailable</p><p class="state-panel__text">ROLLBACK_NOT_AVAILABLE</p></div></div>
+      </div>
+      <ul class="review-checklist">
+        <li>All 17 stateIds present</li>
+        <li>Each has icon + text + color role</li>
+      </ul>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S07 -->
+    <section class="preview-section" id="S07" data-section="S07">
+      <a class="rule-link" href="../../global-risk-interaction-rules.md">global-risk-interaction-rules.md</a>
+      <h2>S07 — Risk Actions</h2>
+      <p class="purpose">read / destructive / external-code distinct.</p>
+      <div class="risk-grid">
+        <div class="risk-card risk-card--read">
+          <span class="risk-badge risk-badge--read">read</span>
+          <p class="type-body">status.get — bridge.ui.cursor.status</p>
+        </div>
+        <div class="risk-card risk-card--destructive">
+          <span class="risk-badge risk-badge--destructive">destructive</span>
+          <p class="type-body">terminal.run — bridge.ui.terminal.command</p>
+        </div>
+        <div class="risk-card risk-card--external-code">
+          <span class="risk-badge risk-badge--external-code">external-code</span>
+          <p class="type-body">extension.install — bridge.ui.extension.install</p>
+        </div>
+      </div>
+      <ul class="review-checklist">
+        <li>Three risk classes distinct</li>
+      </ul>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S08 -->
+    <section class="preview-section" id="S08" data-section="S08">
+      <a class="rule-link" href="../../global-risk-interaction-rules.md">global-risk-interaction-rules.md</a>
+      <h2>S08 — Confirmation Flows</h2>
+      <p class="purpose">Mock confirm dialogs — Cancel always visible.</p>
+      <div class="confirm-mocks">
+        <div class="confirm-sheet">
+          <p class="type-title">workspace.open (medium)</p>
+          <p class="type-body">Open workspace folder?</p>
+          <div class="confirm-sheet__actions">
+            <button type="button" class="btn btn--secondary">Cancel</button>
+            <button type="button" class="btn btn--primary">Confirm</button>
+          </div>
+        </div>
+        <div class="confirm-sheet">
+          <div class="confirm-sheet__banner">External code — review before install</div>
+          <p class="type-title">extension.install</p>
+          <p class="type-body">Install extension from marketplace?</p>
+          <div class="confirm-sheet__actions">
+            <button type="button" class="btn btn--secondary">Cancel</button>
+            <button type="button" class="btn btn--danger">Install</button>
+          </div>
+        </div>
+        <div class="confirm-sheet confirm-sheet--restore">
+          <p class="type-title">terminal.run (destructive)</p>
+          <p class="type-body">Run: npm run build</p>
+          <p class="type-mono">snapshotId: snap-restore-demo</p>
+          <div class="confirm-sheet__actions">
+            <button type="button" class="btn btn--secondary">Cancel</button>
+            <button type="button" class="btn btn--primary">Run</button>
+          </div>
+        </div>
+      </div>
+      <ul class="review-checklist">
+        <li>external-code has banner</li>
+        <li>Restore uses caution not success green</li>
+      </ul>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S09 -->
+    <section class="preview-section" id="S09" data-section="S09">
+      <a class="rule-link" href="../../global-control-design-rules.md">global-control-design-rules.md</a>
+      <h2>S09 — Permission Gate</h2>
+      <p class="purpose">Allowed vs denied module render; allowlist violation.</p>
+      <div class="gate-demo">
+        <div class="gate-wrapper">
+          <p class="type-label">Allowed — bridge.ui.workspace visible</p>
+          <div class="surface-card">Workspace module content</div>
+        </div>
+        <div class="gate-wrapper gate-wrapper--denied">
+          <p class="type-label">Permission denied — no submit</p>
+          <div class="state-panel state-panel--permission-denied">
+            <svg class="state-panel__icon icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18"/></svg>
+            <div><p class="state-panel__title">permission denied</p><p class="state-panel__text">workspace.write required</p></div>
+          </div>
+        </div>
+        <div class="allowlist-error">
+          <p class="error-code">ALLOWLIST_VIOLATION</p>
+          <p class="type-body">Command not on allowlist. Allowed: npm run build, git status, …</p>
+        </div>
+      </div>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S10 -->
+    <section class="preview-section" id="S10" data-section="S10">
+      <a class="rule-link" href="../../global-control-design-rules.md">global-control-design-rules.md</a>
+      <h2>S10 — Audit History</h2>
+      <p class="purpose">History with risk badges; redacted secrets.</p>
+      <ul class="audit-list">
+        <li class="audit-row"><span>Time</span><span>riskClass</span><span>Outcome</span></li>
+        <li class="audit-row"><span>10:02</span><span class="risk-badge risk-badge--read">read</span><span>ok</span></li>
+        <li class="audit-row"><span>10:05</span><span class="risk-badge risk-badge--destructive">destructive</span><span>ok</span></li>
+        <li class="audit-row"><span>10:08</span><span class="risk-badge risk-badge--external-code">external-code</span><span>ok</span></li>
+        <li class="audit-row"><span>10:11</span><span class="type-mono">prompt: [redacted]</span><span>—</span></li>
+      </ul>
+      <p class="type-caption">Newest first (described in rules).</p>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S11 -->
+    <section class="preview-section" id="S11" data-section="S11">
+      <a class="rule-link" href="../../global-module-composition-rules.md">global-module-composition-rules.md</a>
+      <h2>S11 — Module Stack</h2>
+      <p class="purpose">BridgeMobileView.cursor vertical stack + cross-cutting outside stack.</p>
+      <div class="module-stack-diagram" role="list">
+        <div class="module-stack-item" role="listitem">1 bridge.ui.permission.gate</div>
+        <div class="module-stack-item" role="listitem">2 bridge.ui.cursor.status (sticky)</div>
+        <div class="module-stack-item" role="listitem">3 bridge.ui.workspace</div>
+        <div class="module-stack-item" role="listitem">4 bridge.ui.editor (collapsed)</div>
+        <div class="module-stack-item" role="listitem">5 bridge.ui.file.create</div>
+        <div class="module-stack-item" role="listitem">6 bridge.ui.settings</div>
+        <div class="module-stack-item module-stack-item--risk" role="listitem">7 bridge.ui.extension.install</div>
+        <div class="module-stack-item module-stack-item--risk" role="listitem">8 bridge.ui.terminal.command</div>
+        <div class="module-stack-item module-stack-item--risk" role="listitem">9 bridge.ui.ide.command</div>
+        <div class="module-stack-item" role="listitem">10–12 panels / git / problems</div>
+        <div class="module-stack-item module-stack-item--subsystem" role="listitem">13 bridge.ui.agent.prompt</div>
+        <div class="module-stack-item" role="listitem">14 bridge.ui.audit.history</div>
+        <div class="module-stack-item" role="listitem">15 bridge.ui.version.info</div>
+      </div>
+      <div class="overlay-callout">
+        <strong>crossCutting (outside stack):</strong><br>
+        bridge.ui.confirmation.dialog · bridge.ui.action.result · bridge.ui.error.state
+      </div>
+      <p class="forbidden-label">monolithic-cursor-control-page — FORBIDDEN</p>
+      <ul class="review-checklist">
+        <li>Order matches moduleOrder</li>
+        <li>Agent before audit</li>
+      </ul>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S12 -->
+    <section class="preview-section" id="S12" data-section="S12">
+      <a class="rule-link" href="../../global-control-design-rules.md">global-control-design-rules.md</a>
+      <h2>S12 — Restore / Rollback</h2>
+      <p class="purpose">Restore available vs unavailable.</p>
+      <div class="restore-demo">
+        <div class="restore-result restore-cta--available">
+          <p class="type-mono">snapshotId: snap-7f3a2b</p>
+          <p class="type-body">Action succeeded — rollback available.</p>
+          <button type="button" class="btn btn--primary">Restore</button>
+        </div>
+        <div class="restore-result">
+          <p class="type-body">rollbackAvailable: false — no CTA</p>
+          <p class="type-mono">ROLLBACK_NOT_AVAILABLE — irreversible action</p>
+        </div>
+      </div>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S13 -->
+    <section class="preview-section" id="S13" data-section="S13">
+      <a class="rule-link" href="../../global-control-design-rules.md">global-control-design-rules.md</a>
+      <h2>S13 — Terminal Action</h2>
+      <p class="purpose">Whitelist-only picker — no free text.</p>
+      <ul class="terminal-picker">
+        <li class="terminal-picker-row">npm run build</li>
+        <li class="terminal-picker-row">npm test</li>
+        <li class="terminal-picker-row">git status</li>
+        <li class="terminal-picker-row">git diff</li>
+        <li class="terminal-picker-row">pnpm install</li>
+        <li class="terminal-picker-row">node --version</li>
+      </ul>
+      <p class="type-caption">destructive emphasis · confirm on submit (described)</p>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S14 -->
+    <section class="preview-section" id="S14" data-section="S14">
+      <a class="rule-link" href="../../global-module-composition-rules.md">global-module-composition-rules.md</a>
+      <h2>S14 — Agent Subsystem</h2>
+      <p class="purpose">Agent separated from IDE main flow — not bottom primary bar.</p>
+      <div class="agent-subsystem">
+        <span class="badge-subsystem">Subsystem</span>
+        <p class="type-title">bridge.ui.agent.prompt</p>
+        <div class="agent-prompt-mock">[redacted] user prompt preview…</div>
+        <div class="toggle-row">
+          <span class="toggle-shape" aria-hidden="true"></span>
+          <span class="type-label">allowFileChanges</span>
+        </div>
+        <p class="type-caption">Not in bottom primary bar · accordion optional (roadmap)</p>
+      </div>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S15 — device frame only here; main column elsewhere -->
+    <section class="preview-section" id="S15" data-section="S15">
+      <a class="rule-link" href="../../global-mobile-control-rules.md">global-mobile-control-rules.md</a>
+      <h2>S15 — Mobile Frame (device-profile-default-a)</h2>
+      <p class="purpose">412×915 logical px; safe areas; bottom action zone 72px + safe bottom 34px.</p>
+      <div class="device-frame-outer">
+        <div class="device-frame" aria-label="Device frame 412 by 915">
+          <div class="device-frame__safe-top">safe top 24px</div>
+          <div class="device-frame__status">sticky — bridge.ui.cursor.status</div>
+          <div class="device-frame__scroll">
+            <p class="type-body">Scrollable module stack area</p>
+            <p class="type-caption">User device profiles CRUD — roadmap (interactive preview)</p>
+          </div>
+          <div class="device-frame__bottom-zone">bottom action zone 72px + safe bottom 34px</div>
+        </div>
+      </div>
+      <ul class="review-checklist">
+        <li>Default profile locked</li>
+        <li>412×915 and safe areas</li>
+      </ul>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S16 -->
+    <section class="preview-section" id="S16" data-section="S16">
+      <a class="rule-link" href="../../global-base-design-rules.md">global-base-design-rules.md</a>
+      <h2>S16 — Darkmode-first</h2>
+      <p class="purpose">Default dark theme; light theme deferred; WCAG AA note.</p>
+      <div class="surface-card">
+        <p class="type-body">text on surface — AA target</p>
+        <p class="type-caption">textMuted on surface — readable</p>
+      </div>
+      <table class="contrast-table">
+        <thead><tr><th>Pairing</th><th>Level</th></tr></thead>
+        <tbody>
+          <tr><td>text on bg</td><td>WCAG 2.1 AA (global)</td></tr>
+          <tr><td>destructive / external-code primary</td><td>AAA where possible (C2)</td></tr>
+          <tr><td>Light theme</td><td>deferred post-P2</td></tr>
+        </tbody>
+      </table>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+    <!-- S17 -->
+    <section class="preview-section" id="S17" data-section="S17">
+      <a class="rule-link" href="../../global-state-display-rules.md">global-state-display-rules.md</a>
+      <h2>S17 — Error / Blocked / Offline</h2>
+      <p class="purpose">Gate and connectivity failures with errorCode.</p>
+      <div class="error-panels">
+        <div class="error-panel error-panel--warn">
+          <p class="error-code">CONFIRMATION_REQUIRED</p>
+          <p class="type-body">Inline confirmation required</p>
+        </div>
+        <div class="error-panel">
+          <p class="error-code">ALLOWLIST_VIOLATION</p>
+          <p class="type-body">Command not allowed</p>
+        </div>
+        <div class="error-panel">
+          <p class="error-code">PERMISSION_DENIED</p>
+          <p class="type-body">Missing permission</p>
+        </div>
+        <div class="error-panel error-panel--muted">
+          <p class="state-panel__title">offline</p>
+          <p class="type-body">Network failure — retry when meaningful</p>
+        </div>
+        <div class="error-panel error-panel--muted">
+          <p class="error-code">EXTENSION_UNREACHABLE</p>
+          <p class="type-body">unreachable — distinct from offline</p>
+        </div>
+        <div class="error-panel">
+          <p class="type-body">blocked action — disabled control, no submit</p>
+        </div>
+      </div>
+      <p class="preview-watermark">REVIEW ONLY</p>
+    </section>
+
+  </main>
+
+  <footer class="preview-page-footer">
+    <p>REVIEW ONLY — not product UI</p>
+    <p>Roadmap: interactive preset / device-profile editor — not in D0c v1</p>
+    <p>D0c static preview · schema control-tokens-1.0.0</p>
+  </footer>
+</body>
+</html>

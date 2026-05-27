@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "control-tokens-1.0.0",
+  "meta": {
+    "defaultColorPresetId": "neutral-blue-gray",
+    "defaultElevationProfileId": "elevation-profile-a",
+    "defaultDeviceProfileId": "device-profile-default-a",
+    "defaultEffectProfileId": "effect-profile-default-a",
+    "tokenPrefix": "control",
+    "reviewDefaultsNote": "These hex values are D0c review defaults only; not CoreAI brand; subject to post-D0c visual correction pass."
+  },
+  "colorPresets": {
+    "neutral-blue-gray": {
+      "locked": true,
+      "label": "Neutral Blue Gray (Review Default)",
+      "colors": {
+        "control.color.bg": "#0f1419",
+        "control.color.surface": "#1a2332",
+        "control.color.surfaceElevated": "#243044",
+        "control.color.text": "#e8eef7",
+        "control.color.textMuted": "#8b9cb3",
+        "control.color.accent": "#4a9eff",
+        "control.color.accentMuted": "#3b82f6",
+        "control.color.ok": "#22c55e",
+        "control.color.warn": "#f59e0b",
+        "control.color.danger": "#ef4444",
+        "control.color.border": "#2d3a4f",
+        "control.color.focus": "#60a5fa"
+      }
+    },
+    "brand-placeholder": {
+      "locked": false,
+      "label": "Brand Preset (user-provided values only)",
+      "colors": {},
+      "note": "No invented CoreAI brand colors"
+    }
+  },
+  "elevationProfiles": {
+    "elevation-profile-a": {
+      "locked": true,
+      "levels": {
+        "none": {
+          "shadow": "none",
+          "radiusKey": null
+        },
+        "raised": {
+          "shadow": "0 2px 8px rgba(0,0,0,0.35)",
+          "radiusKey": "control.radius.lg"
+        },
+        "overlay": {
+          "shadow": "0 8px 32px rgba(0,0,0,0.5)",
+          "radiusKey": "control.radius.xl"
+        },
+        "modal": {
+          "shadow": "0 12px 48px rgba(0,0,0,0.55)",
+          "radiusKey": "control.radius.xl"
+        }
+      }
+    }
+  },
+  "deviceProfiles": {
+    "device-profile-default-a": {
+      "locked": true,
+      "editable": false,
+      "deletable": false,
+      "label": "Galaxy S25 Ultra (Review Reference)",
+      "logicalWidthPx": 412,
+      "logicalHeightPx": 915,
+      "safeTopPx": 24,
+      "safeBottomPx": 34,
+      "bottomActionZonePx": 72
+    }
+  },
+  "effectProfiles": {
+    "effect-profile-default-a": {
+      "locked": true,
+      "dialogInMs": 200,
+      "dialogInEasing": "ease-out",
+      "dialogOutMs": 150,
+      "dialogOutEasing": "ease-in",
+      "bounce": false
+    }
+  },
+  "tokens": {
+    "control.space.xs": "4px",
+    "control.space.sm": "8px",
+    "control.space.md": "16px",
+    "control.space.lg": "24px",
+    "control.space.xl": "32px",
+    "control.radius.sm": "6px",
+    "control.radius.md": "10px",
+    "control.radius.lg": "14px",
+    "control.radius.xl": "18px",
+    "control.touch.min": "48px",
+    "control.touch.gap": "8px",
+    "control.layout.reviewColumnMax": "480px",
+    "control.opacity.disabled": "0.5",
+    "control.type.caption.size": "0.75rem",
+    "control.type.caption.weight": "400",
+    "control.type.body.size": "0.9375rem",
+    "control.type.body.weight": "400",
+    "control.type.body.lineHeight": "1.45",
+    "control.type.label.size": "0.8125rem",
+    "control.type.label.weight": "600",
+    "control.type.title.size": "1.125rem",
+    "control.type.title.weight": "700",
+    "control.type.headline.size": "1.375rem",
+    "control.type.headline.weight": "700",
+    "control.type.mono.family": "ui-monospace, monospace",
+    "control.type.mono.size": "0.8125rem"
+  }
+}
