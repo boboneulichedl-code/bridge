@@ -15,7 +15,15 @@ const FORBIDDEN_DEPS = [
   "@bridge/ui-cursor",
 ];
 
-const FORBIDDEN_IMPORT_SNIPPETS = ["adapters/cursor", "bridge-web", "preview/static", "bridge-api"];
+const FORBIDDEN_IMPORT_SNIPPETS = [
+  "@bridge/ui-cursor",
+  "@bridge/cursor-adapter",
+  "adapters/cursor",
+  "bridge-api",
+  "bridge-web",
+  "web/",
+  "preview/static",
+];
 
 function collectSourceFiles(dir: string): string[] {
   const entries = readdirSync(dir, { withFileTypes: true });
@@ -23,7 +31,7 @@ function collectSourceFiles(dir: string): string[] {
   for (const entry of entries) {
     const full = join(dir, entry.name);
     if (entry.isDirectory()) files.push(...collectSourceFiles(full));
-    else if (entry.name.endsWith(".ts")) files.push(full);
+    else if (entry.name.endsWith(".ts") || entry.name.endsWith(".tsx")) files.push(full);
   }
   return files;
 }
@@ -36,7 +44,7 @@ describe("@bridge/ui package boundary", () => {
     }
   });
 
-  it("does not import cursor, api, web, or preview paths in src", () => {
+  it("does not import cursor, api, web, or preview paths in src (.ts and .tsx)", () => {
     const files = collectSourceFiles(join(pkgRoot, "src"));
     for (const file of files) {
       const content = readFileSync(file, "utf8");

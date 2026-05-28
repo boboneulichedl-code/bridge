@@ -222,3 +222,27 @@ Siehe [global-risk-interaction-rules.md](global-risk-interaction-rules.md).
 
 Unspezifiziertes Control-Pattern → **Blocker**.  
 UI ohne Registry-Modul-Entsprechung → **Blocker** (oder Registry-Änderung zuerst).
+
+---
+
+## 16. React component binding (@bridge/ui)
+
+> **Phase:** P2.1-pre — Binding rules for the global `@bridge/ui` package. Applies before any React component or preview gallery implementation.
+
+**Catalog source:** [tokens/control.components.json](tokens/control.components.json)  
+**Token source:** generated `control-tokens` / [control.tokens.json](tokens/control.tokens.json) via `@bridge/ui` theme helpers  
+**Preview spec:** [preview/global-control-design-preview-spec.md](preview/global-control-design-preview-spec.md) (sections S01–S17)
+
+| Regel | Stufe |
+|-------|-------|
+| React components in `@bridge/ui` MUST use semantic design tokens via generated control tokens and CSS variables (`applyControlTokens`, `var(--control-*)`) | MUST |
+| Components MUST NOT use hardcoded hex, `rgb(`, or `hsl(` color literals in source | MUST NOT |
+| Components MUST NOT use ad-hoc spacing, radius, or typography values outside `control.space.*`, `control.radius.*`, and `control.type.*` token variables | MUST NOT |
+| Each component MUST implement or explicitly document all `requiredStates` from its catalog entry in [control.components.json](tokens/control.components.json) | MUST |
+| Components SHOULD expose catalog mapping (e.g. `data-control-component="control.component.button.primary"`) | SHOULD |
+| Preview gallery entries SHOULD make `linkedPreviewSection` values from the catalog reviewable (anchors or section panels S01–S17) | SHOULD |
+| `@bridge/ui` MUST NOT contain Cursor-specific behavior, adapter logic, API calls, or product routing | MUST NOT |
+| `@bridge/ui` MUST NOT import from `@bridge/ui-cursor`, `@bridge/cursor-adapter`, `bridge-api`, `bridge-web`, `web/`, or legacy `preview/static/` | MUST NOT |
+| `@bridge/ui` MUST NOT depend on `@bridge/ui-cursor`, `@bridge/cursor-adapter`, `bridge-api`, or `bridge-web` | MUST NOT |
+
+**Enforcement:** Static tests in `packages/ui/tests/react-binding-rule.test.ts` and `packages/ui/tests/boundary.test.ts` scan `packages/ui/src/**/*.tsx` for violations. No component file is merge-ready if these tests fail.
