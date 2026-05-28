@@ -5,6 +5,8 @@
   "description": "Cursor Agent Bridge — API, Mobile UI, Auto-Update, MCP-Orchestrierung",
   "workspaces": [
     "shared",
+    "packages/ui",
+    "packages/ui-cursor",
     "adapters/cursor",
     "extension",
     "cli",
@@ -13,7 +15,7 @@
     "web"
   ],
   "scripts": {
-    "build": "npm run build -w @bridge/shared -w @bridge/cursor-adapter -w bridge-cli -w bridge-mcp-server -w bridge-api -w bridge-web -w cursor-agent-bridge && node scripts/generate-version.js && node scripts/generate-catalog.js",
+    "build": "node scripts/generate-control-tokens.js && npm run build -w @bridge/ui -w @bridge/ui-cursor && npm run build -w @bridge/shared -w @bridge/cursor-adapter -w bridge-cli -w bridge-mcp-server -w bridge-api -w bridge-web -w cursor-agent-bridge && node scripts/generate-version.js && node scripts/generate-catalog.js",
     "install:all": "npm install && npm run build",
     "serve": "node api/dist/server.js",
     "deploy": "bash infra/deploy.sh",
@@ -25,6 +27,8 @@
     "dev:api": "npm run build && npm run serve",
     "package:extension": "npm run build -w cursor-agent-bridge && cd extension && npx --yes @vscode/vsce package --no-dependencies",
     "test:p0": "npm test -w @bridge/shared && npm test -w @bridge/cursor-adapter && npm test -w bridge-api && npm test -w cursor-agent-bridge",
+    "test:p2-ui": "npm test -w @bridge/ui && npm test -w @bridge/ui-cursor",
+    "generate:control-tokens": "node scripts/generate-control-tokens.js",
     "validate:ui-modules": "npm run build -w @bridge/cursor-adapter && node scripts/validate-ui-modules-registry.js"
   },
   "engines": {
