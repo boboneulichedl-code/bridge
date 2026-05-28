@@ -44,3 +44,12 @@ export const CONTROL_TOKENS = {
 export type ControlTokenKey = keyof typeof CONTROL_TOKENS;
 
 export const CONTROL_TOKEN_KEYS = Object.keys(CONTROL_TOKENS) as ControlTokenKey[];
+
+export const CONTROL_ELEVATION_SHADOWS = {
+  "modal": "0 12px 48px rgba(0,0,0,0.55)",
+  "none": "none",
+  "overlay": "0 8px 32px rgba(0,0,0,0.5)",
+  "raised": "0 2px 8px rgba(0,0,0,0.35)",
+} as const;
+
+export type ControlElevationLevel = keyof typeof CONTROL_ELEVATION_SHADOWS;

@@ -15,6 +15,7 @@ coverage/
 
 # Review / temp exports (not product source)
 chatgpt_files/
+packages/ui/preview/review-artifacts/
 
 # Electron-builder output (overlay; distinct from tsc dist/)
 overlay/bridge-overlay/release/

@@ -4,6 +4,7 @@ import { join, relative } from "node:path";
 
 const pkgRoot = join(__dirname, "..");
 const srcRoot = join(pkgRoot, "src");
+const previewRoot = join(pkgRoot, "preview");
 const rulesPath = join(
   pkgRoot,
   "../../docs/global-design/control-rules/global-control-design-rules.md",
@@ -23,6 +24,7 @@ const HARDCODED_COLOR_PATTERNS = [
   { name: "hex color", pattern: /#([0-9a-fA-F]{3,8})\b/ },
   { name: "rgb(", pattern: /\brgb\s*\(/ },
   { name: "hsl(", pattern: /\bhsl\s*\(/ },
+  { name: "rgba(", pattern: /\brgba\s*\(/ },
 ];
 
 const REQUIRED_RULE_PHRASES = [
@@ -60,8 +62,9 @@ describe("P2.1-pre-0 — React binding design rule (B1)", () => {
     }
   });
 
-  it("src/**/*.tsx has no hardcoded color literals or forbidden imports", () => {
-    const files = collectTsxFiles(srcRoot);
+  it("src/**/*.tsx and preview/**/*.tsx have no hardcoded color literals or forbidden imports", () => {
+    const files = [...collectTsxFiles(srcRoot), ...collectTsxFiles(previewRoot)];
+    expect(files.length).toBeGreaterThan(0);
     for (const file of files) {
       const content = readFileSync(file, "utf8");
       const rel = relative(pkgRoot, file);

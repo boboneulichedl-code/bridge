@@ -1,0 +1,98 @@
+.preview-section {
+  max-width: var(--control-layout-reviewColumnMax);
+  margin: 0 auto var(--control-space-xl);
+  padding: var(--control-space-lg);
+  background: var(--control-color-surface);
+  border: 1px solid var(--control-color-border);
+  border-radius: var(--control-radius-lg);
+}
+
+.preview-section__title {
+  font-size: var(--control-type-title-size);
+  font-weight: var(--control-type-title-weight);
+  margin: 0 0 var(--control-space-sm);
+  color: var(--control-color-text);
+}
+
+.preview-section__purpose {
+  font-size: var(--control-type-body-size);
+  color: var(--control-color-textMuted);
+  line-height: var(--control-type-body-lineHeight);
+  margin: 0 0 var(--control-space-md);
+}
+
+.preview-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--control-space-sm);
+  margin-top: var(--control-space-md);
+}
+
+.preview-nav a {
+  color: var(--control-color-accent);
+  font-size: var(--control-type-label-size);
+  text-decoration: none;
+  padding: var(--control-space-xs) var(--control-space-sm);
+  border: 1px solid var(--control-color-border);
+  border-radius: var(--control-radius-sm);
+}
+
+.preview-nav a:hover {
+  border-color: var(--control-color-accent);
+}
+
+.preview-grid {
+  display: grid;
+  gap: var(--control-space-md);
+}
+
+.preview-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--control-space-sm);
+  align-items: center;
+}
+
+.preview-token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--control-space-sm);
+}
+
+.preview-token-swatch {
+  border: 1px solid var(--control-color-border);
+  border-radius: var(--control-radius-sm);
+  overflow: hidden;
+}
+
+.preview-token-swatch__color {
+  height: var(--control-space-xl);
+}
+
+.preview-token-swatch__label {
+  padding: var(--control-space-xs);
+  font-size: var(--control-type-caption-size);
+  color: var(--control-color-textMuted);
+  word-break: break-all;
+}
+
+.preview-spacing-bar {
+  height: var(--control-space-md);
+  background: var(--control-color-accentMuted);
+  border-radius: var(--control-radius-sm);
+}
+
+.preview-forbidden {
+  text-decoration: line-through;
+  color: var(--control-color-danger);
+  font-size: var(--control-type-label-size);
+}
+
+.preview-overlay-label {
+  padding: var(--control-space-sm);
+  border: 1px dashed var(--control-color-warn);
+  border-radius: var(--control-radius-md);
+  color: var(--control-color-warn);
+  font-size: var(--control-type-caption-size);
+  margin-top: var(--control-space-md);
+}
