@@ -1,0 +1,162 @@
+---
+description: Cursor-User-ChatGPT workflow — NEXT ACTION, EXECUTION_DONE, REVIEW_READY, Git/Push plan templates
+alwaysApply: true
+---
+
+# Workflow Efficiency (Bridge)
+
+**Canonical spec:** [docs/adapters/cursor/workflow-efficiency.md](../docs/adapters/cursor/workflow-efficiency.md)
+
+This rule extends global RF/WF user rules. It does not replace RF headers or end lines.
+
+---
+
+## 0. Cursor response file — BRIDGE filename law (every response, permanent unique)
+
+After **every** Cursor response, save a **new** Markdown file permanently under:
+
+**Path:** `chatgpt_files/cursor_responses/`
+
+### Grundgesetz — exact filename schema (mandatory)
+
+```
+YYYY-MM-DD_HHMMSS_BRIDGE_WORKFLOW_<ID>_<cursor-topic>.md
+```
+
+**Segment order (no variations):**
+
+1. `YYYY-MM-DD` — date
+2. `HHMMSS` — time, **exactly 6 digits** (local time)
+3. `BRIDGE` — fixed literal, always present
+4. `WORKFLOW` — fixed literal, always present
+5. `<ID>` — current work ID (e.g. `P2-1-pre-1`, `P2-1-pre-report`, `P2-1a`, `Git-Checkpoint`, `CI-Fix`, `GENERAL`)
+6. `<cursor-topic>` — short, Cursor-defined, lowercase-with-hyphens
+7. Optional collision suffix before `.md`: `_01`, `_02`, `_03`
+
+**Character rules:** `A-Z`, `a-z`, `0-9`, hyphen, underscore only. **No** spaces. **No** colons. **No** other special characters.
+
+**Forbidden (removed — do not use):**
+
+- `YYYY-MM-DD_HHMM_<anything>.md` (4-digit time)
+- `YYYY-MM-DD_HHMMSS_<phase>_<workflow-state>_<short-topic>.md` (old schema without `BRIDGE_WORKFLOW`)
+
+**Retention:**
+
+- **Never** overwrite an existing response file
+- **Never** delete old response files
+- **Never** move response files to `chatgpt_files/analysed/`
+- Legacy files under old naming stay untouched; BRIDGE law applies to **new** files only
+
+**Examples (identical to canonical spec):**
+
+- `2026-05-28_065234_BRIDGE_WORKFLOW_P2-1-pre-1_execution-done_visual-foundation.md`
+- `2026-05-28_070012_BRIDGE_WORKFLOW_P2-1-pre-report_plan-created_git-checkpoint.md`
+- `2026-05-28_070045_BRIDGE_WORKFLOW_GENERAL_test_response-file-handoff.md`
+- `2026-05-28_070045_BRIDGE_WORKFLOW_GENERAL_test_response-file-handoff_01.md`
+
+**File must always contain:** Task, Phase, Workflow, Mode, full Cursor response body, NEXT ACTION block.
+
+**Include when applicable:** git stand, changed/created files, tests run, `git status --short`, forbidden paths touched, review bundle, CI status/logs, staging list, push plan.
+
+**Chat rules:**
+
+- Chat may be short; full answer lives in the file
+- **Always** state the exact path of the newly saved response file in chat
+- Write a new file even for trivial one-word answers
+- No exceptions except write failure — report error in chat
+
+---
+
+## 1. Every response ends with NEXT ACTION
+
+After main content and before the RF end line, include:
+
+```markdown
+NEXT ACTION:
+- Mode: Plan | Agent | Ask
+- User action: <one clear action>
+- Blocked by: <what is missing, or "none">
+- Suggested prompt/action: <copy-paste-ready prompt or command>
+```
+
+| Workflow state | Mode | Typical user action |
+|----------------|------|---------------------|
+| PLAN_CREATED | Plan | PLAN_REVIEWED or corrections |
+| FINAL_PLAN_CONFIRMED | Agent | Start execution |
+| EXECUTION_DONE | Plan / Agent | Review or plan Git checkpoint |
+| REVIEW_DONE | Plan | Next phase PLAN_CREATED |
+
+---
+
+## 2. EXECUTION_DONE must include
+
+- **changed files** — list or `none`
+- **created files** — list or `none`
+- **tests run** — command + result, or `none`
+- **git status --short** — verbatim or `clean`
+- **forbidden paths touched** — `yes/no` (+ which, if yes)
+- **review bundle recommendation** — see section 3 (short form)
+- **next safe step** — one sentence
+
+**Standard forbidden paths (when out of scope):**
+
+- `web/`, `api/src/` (runtime), `adapters/cursor/src/`
+- `shared/`, `packages/ui-cursor/`
+- `package.json`, `package-lock.json`
+- `.github/workflows/`
+- `packages/ui/preview/dist/`, `packages/ui/preview/review-artifacts/`
+- `bridge.version.json`, `integrations/catalog.json`
+
+---
+
+## 3. REVIEW_READY must include
+
+- **exact files to upload** — explicit paths
+- **suggested ZIP name** — `bridge-{phase}-{YYYYMMDD}-review.zip`
+- **exclude** — standard list below
+
+**Standard exclude:**
+
+```
+node_modules/
+dist/
+packages/ui/preview/dist/
+packages/ui/preview/review-artifacts/
+.env
+bridge.version.json
+integrations/catalog.json
+.git/
+```
+
+Include only scope files + relevant docs/tests. Docs-only phases: report (+ plan if used).
+
+---
+
+## 4. Git checkpoint plans must include
+
+| Section | Content |
+|---------|---------|
+| exact staging list | Explicit `git add` paths only |
+| forbidden files | What must not be staged |
+| pre-commit checks | `git status`, `git diff --stat`, branch, scope |
+| post-commit checks | `git show --stat`, clean status, ahead count |
+| push yes/no | Always explicit: `push: no (separate plan)` or link to push plan |
+
+**PowerShell:** use `git commit -m "message"` only — **no HEREDOC**.
+
+Never use `git add -A`, `git add .`, or broad directory adds unless explicitly approved.
+
+---
+
+## 5. Push plans must include
+
+| Section | Content |
+|---------|---------|
+| exact commits ahead | SHA + message per commit |
+| fast-forward check | `origin/main` vs HEAD; abort if not FF |
+| CI expected run | Workflow name (e.g. `P2 Foundation`) |
+| CI result reporting | GitHub Actions URL + status/conclusion; API fallback if `gh` unavailable |
+
+Reference: `.github/workflows/p2-foundation.yml` triggers on every push to `main`.
+
+Push command: `git push origin main` — no `--force` unless explicitly approved.
