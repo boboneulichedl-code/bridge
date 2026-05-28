@@ -24,7 +24,8 @@
     "dev:web": "npm run dev -w web",
     "dev:api": "npm run build && npm run serve",
     "package:extension": "npm run build -w cursor-agent-bridge && cd extension && npx --yes @vscode/vsce package --no-dependencies",
-    "test:p0": "npm test -w @bridge/shared && npm test -w @bridge/cursor-adapter && npm test -w bridge-api && npm test -w cursor-agent-bridge"
+    "test:p0": "npm test -w @bridge/shared && npm test -w @bridge/cursor-adapter && npm test -w bridge-api && npm test -w cursor-agent-bridge",
+    "validate:ui-modules": "npm run build -w @bridge/cursor-adapter && node scripts/validate-ui-modules-registry.js"
   },
   "engines": {
     "node": ">=18"

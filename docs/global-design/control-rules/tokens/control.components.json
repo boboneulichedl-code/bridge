@@ -1,0 +1,1446 @@
+{
+  "schemaVersion": "control-components-1.0.0",
+  "meta": {
+    "tokenPrefix": "control",
+    "componentIdPrefix": "control.component",
+    "patternIdPrefix": "control.pattern",
+    "sourceOfTruth": "docs/global-design/control-rules/tokens/control.components.json",
+    "linkedTokenFile": "control.tokens.json",
+    "reviewArtifactOnly": false,
+    "notProductUi": true,
+    "phase": "P2.0-pre",
+    "description": "Global Control Design component and pattern catalog. Used by p2-module-token-crosswalk.md and future P2 CI validation (D3)."
+  },
+  "validationRules": {
+    "idMustBeUnique": true,
+    "requiredTokensMustExistInControlTokensJson": true,
+    "linkedPreviewSectionMustExistInPreviewSpec": true,
+    "sourceRuleFilesMustExist": true
+  },
+  "components": [
+    {
+      "id": "control.component.button.primary",
+      "displayName": "Primary Button",
+      "category": "foundation",
+      "description": "Default call-to-action for normal-risk actions.",
+      "linkedPreviewSection": [
+        "S05"
+      ],
+      "requiredStates": [
+        "default",
+        "disabled",
+        "loading"
+      ],
+      "requiredTokens": [
+        "control.color.accent",
+        "control.color.text",
+        "control.color.focus",
+        "control.radius.md",
+        "control.space.md",
+        "control.touch.min",
+        "control.opacity.disabled",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "allowedRiskLevels": [
+        "read-only",
+        "normal",
+        "medium"
+      ],
+      "usageRules": [
+        "MUST use for normal-risk primary actions only",
+        "MUST maintain min touch height control.touch.min",
+        "SHOULD show loading state without shrinking target"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT use as primary for destructive actions",
+        "MUST NOT use for external-code install confirm"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-control-design-rules.md",
+        "docs/global-design/control-rules/global-state-display-rules.md",
+        "docs/global-design/control-rules/global-mobile-control-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.button.secondary",
+      "displayName": "Secondary Button",
+      "category": "foundation",
+      "description": "Secondary action such as Cancel or low-emphasis navigation.",
+      "linkedPreviewSection": [
+        "S05",
+        "S08"
+      ],
+      "requiredStates": [
+        "default",
+        "disabled",
+        "loading"
+      ],
+      "requiredTokens": [
+        "control.color.surface",
+        "control.color.text",
+        "control.color.border",
+        "control.radius.md",
+        "control.space.md",
+        "control.touch.min",
+        "control.opacity.disabled",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "allowedRiskLevels": [
+        "read-only",
+        "normal",
+        "medium",
+        "high",
+        "destructive",
+        "external-code",
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST remain visible in confirmation dialogs as Cancel",
+        "MUST meet min touch target"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT be sole action on destructive flows without visible Cancel elsewhere"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-control-design-rules.md",
+        "docs/global-design/control-rules/global-risk-interaction-rules.md",
+        "docs/global-design/control-rules/global-mobile-control-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.button.danger",
+      "displayName": "Danger Button",
+      "category": "risk",
+      "description": "Primary confirm or execute control for destructive and high-risk actions.",
+      "linkedPreviewSection": [
+        "S05",
+        "S07",
+        "S08"
+      ],
+      "requiredStates": [
+        "default",
+        "disabled",
+        "loading"
+      ],
+      "requiredTokens": [
+        "control.color.danger",
+        "control.color.text",
+        "control.color.border",
+        "control.radius.md",
+        "control.space.md",
+        "control.touch.min",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "allowedRiskLevels": [
+        "high",
+        "destructive",
+        "external-code"
+      ],
+      "usageRules": [
+        "MUST use for destructive confirm primary",
+        "MUST pair with secondary Cancel in dialogs"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT be default CTA for read-only modules",
+        "MUST NOT replace ok-green for success states"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md",
+        "docs/global-design/control-rules/global-state-display-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.card.surface",
+      "displayName": "Surface Card",
+      "category": "layout",
+      "description": "Raised surface container for module content blocks.",
+      "linkedPreviewSection": [
+        "S04",
+        "S11"
+      ],
+      "requiredStates": [],
+      "requiredTokens": [
+        "control.color.surface",
+        "control.color.border",
+        "control.radius.lg",
+        "control.space.md"
+      ],
+      "allowedRiskLevels": [
+        "read-only",
+        "normal",
+        "medium",
+        "high",
+        "destructive",
+        "external-code",
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST use elevation-profile-a raised level semantically",
+        "SHOULD use inner padding control.space.md"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT use free hex outside control.color.* tokens"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-base-design-rules.md",
+        "docs/global-design/control-rules/global-module-composition-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.card.status",
+      "displayName": "Status Card",
+      "category": "layout",
+      "description": "Sticky or prominent status summary card for adapter health and workspace snapshot.",
+      "linkedPreviewSection": [
+        "S06",
+        "S11",
+        "S15"
+      ],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "disabled",
+        "unreachable"
+      ],
+      "requiredTokens": [
+        "control.color.bg",
+        "control.color.surface",
+        "control.color.text",
+        "control.color.textMuted",
+        "control.color.accent",
+        "control.color.ok",
+        "control.color.warn",
+        "control.color.danger",
+        "control.space.md",
+        "control.space.lg",
+        "control.radius.lg",
+        "control.type.title.size",
+        "control.type.title.weight",
+        "control.type.body.size",
+        "control.type.body.weight",
+        "control.type.caption.size",
+        "control.type.caption.weight"
+      ],
+      "allowedRiskLevels": [
+        "read-only",
+        "low",
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST appear at top of module stack per composition rules",
+        "SHOULD support skeleton loading state"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT embed destructive action CTAs in status card body"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-module-composition-rules.md",
+        "docs/global-design/control-rules/global-state-display-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.moduleSection",
+      "displayName": "Module Section",
+      "category": "layout",
+      "description": "Vertical-stack module wrapper with header, body, and optional collapse.",
+      "linkedPreviewSection": [
+        "S11",
+        "S14"
+      ],
+      "requiredStates": [
+        "disabled",
+        "loading"
+      ],
+      "requiredTokens": [
+        "control.color.surface",
+        "control.color.border",
+        "control.space.lg",
+        "control.space.md",
+        "control.radius.lg"
+      ],
+      "allowedRiskLevels": [
+        "read-only",
+        "normal",
+        "medium",
+        "high",
+        "destructive",
+        "external-code",
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST be one registry module per section",
+        "SHOULD support collapsed default for non-primary modules"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT combine multiple registry modules in one section"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-module-composition-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.moduleSection.header",
+      "displayName": "Module Section Header",
+      "category": "layout",
+      "description": "Module title row with optional risk badge, subsystem badge, and collapse chevron.",
+      "linkedPreviewSection": [
+        "S11",
+        "S14"
+      ],
+      "requiredStates": [
+        "disabled"
+      ],
+      "requiredTokens": [
+        "control.color.text",
+        "control.color.textMuted",
+        "control.type.title.size",
+        "control.type.title.weight",
+        "control.type.label.size",
+        "control.type.label.weight",
+        "control.touch.min",
+        "control.space.sm"
+      ],
+      "allowedRiskLevels": [
+        "read-only",
+        "normal",
+        "medium",
+        "high",
+        "destructive",
+        "external-code",
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST show risk badge when module riskVisibility >= medium",
+        "MUST show subsystem badge for agent subsystem modules"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT hide module title on collapse without accessible label"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-module-composition-rules.md",
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.form.textInput",
+      "displayName": "Text Input",
+      "category": "input",
+      "description": "Single-line text field for settings keys, extension IDs, and generic string input.",
+      "linkedPreviewSection": [
+        "S05",
+        "S13"
+      ],
+      "requiredStates": [
+        "disabled",
+        "error"
+      ],
+      "requiredTokens": [
+        "control.color.surface",
+        "control.color.text",
+        "control.color.border",
+        "control.color.focus",
+        "control.color.danger",
+        "control.radius.md",
+        "control.space.md",
+        "control.touch.min",
+        "control.type.body.size",
+        "control.type.body.weight"
+      ],
+      "allowedRiskLevels": [
+        "normal",
+        "medium",
+        "high",
+        "external-code"
+      ],
+      "usageRules": [
+        "MUST have visible label per form rules",
+        "MUST show validation error inline"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT be used for free-text terminal commands"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-control-design-rules.md",
+        "docs/global-design/control-rules/global-mobile-control-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.form.textArea",
+      "displayName": "Text Area",
+      "category": "input",
+      "description": "Multi-line input for file content and agent prompts.",
+      "linkedPreviewSection": [
+        "S13",
+        "S14"
+      ],
+      "requiredStates": [
+        "disabled",
+        "error"
+      ],
+      "requiredTokens": [
+        "control.color.surface",
+        "control.color.text",
+        "control.color.border",
+        "control.color.focus",
+        "control.radius.md",
+        "control.space.md",
+        "control.type.body.size",
+        "control.type.body.weight",
+        "control.type.mono.family",
+        "control.type.mono.size"
+      ],
+      "allowedRiskLevels": [
+        "medium",
+        "high",
+        "destructive",
+        "external-code"
+      ],
+      "usageRules": [
+        "MUST support long-text scroll behavior on mobile",
+        "MUST NOT show prompt plaintext in audit UI"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT auto-submit on enter for agent prompts without confirm"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-control-design-rules.md",
+        "docs/global-design/control-rules/global-mobile-control-rules.md",
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.form.pathInput",
+      "displayName": "Path Input",
+      "category": "input",
+      "description": "Path string input for workspace open and filesystem operations.",
+      "linkedPreviewSection": [
+        "S13"
+      ],
+      "requiredStates": [
+        "disabled",
+        "error"
+      ],
+      "requiredTokens": [
+        "control.color.surface",
+        "control.color.text",
+        "control.color.border",
+        "control.type.mono.family",
+        "control.type.mono.size",
+        "control.space.md",
+        "control.touch.min"
+      ],
+      "allowedRiskLevels": [
+        "medium",
+        "medium-high",
+        "high"
+      ],
+      "usageRules": [
+        "SHOULD use monospace for path display",
+        "MUST validate allowlist/path policy before submit"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT bypass path allowlist preview in UI"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-control-design-rules.md",
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.form.selectAllowlist",
+      "displayName": "Allowlist Select",
+      "category": "input",
+      "description": "Picker constrained to registry allowlists for terminal commands and IDE commands.",
+      "linkedPreviewSection": [
+        "S09",
+        "S13"
+      ],
+      "requiredStates": [
+        "disabled",
+        "error"
+      ],
+      "requiredTokens": [
+        "control.color.surface",
+        "control.color.text",
+        "control.color.border",
+        "control.color.accent",
+        "control.radius.md",
+        "control.space.md",
+        "control.touch.min",
+        "control.type.body.size",
+        "control.type.body.weight"
+      ],
+      "allowedRiskLevels": [
+        "medium",
+        "high",
+        "destructive"
+      ],
+      "usageRules": [
+        "MUST only offer entries from poc-v1-terminal-whitelist or poc-v1-commands",
+        "MUST NOT allow free-text command entry"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT render editable combobox for terminal.run"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md",
+        "docs/global-design/control-rules/global-control-design-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.form.toggle",
+      "displayName": "Toggle",
+      "category": "input",
+      "description": "Boolean toggle for agent options such as headless and allowFileChanges.",
+      "linkedPreviewSection": [
+        "S13",
+        "S14"
+      ],
+      "requiredStates": [
+        "disabled"
+      ],
+      "requiredTokens": [
+        "control.color.accent",
+        "control.color.surface",
+        "control.color.border",
+        "control.touch.min",
+        "control.space.sm",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "allowedRiskLevels": [
+        "high",
+        "external-code"
+      ],
+      "usageRules": [
+        "MUST show label and current state",
+        "SHOULD require confirmation when toggling increases risk"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT hide destructive side effects of toggles"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-control-design-rules.md",
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.badge.risk",
+      "displayName": "Risk Badge",
+      "category": "risk",
+      "description": "Small badge indicating riskClass on modules, actions, and audit rows.",
+      "linkedPreviewSection": [
+        "S07",
+        "S10"
+      ],
+      "requiredStates": [],
+      "requiredTokens": [
+        "control.color.danger",
+        "control.color.warn",
+        "control.color.textMuted",
+        "control.color.text",
+        "control.radius.sm",
+        "control.space.xs",
+        "control.type.caption.size",
+        "control.type.caption.weight"
+      ],
+      "allowedRiskLevels": [
+        "read-only",
+        "normal",
+        "medium",
+        "high",
+        "destructive",
+        "external-code",
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST distinguish destructive vs external-code vs medium",
+        "MUST appear on audit history rows"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT use ok-green for destructive badge"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md",
+        "docs/global-design/control-rules/global-state-display-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.badge.subsystem",
+      "displayName": "Subsystem Badge",
+      "category": "layout",
+      "description": "Visual marker that module belongs to agent subsystem, not primary IDE navigation.",
+      "linkedPreviewSection": [
+        "S14"
+      ],
+      "requiredStates": [],
+      "requiredTokens": [
+        "control.color.warn",
+        "control.color.surfaceElevated",
+        "control.color.text",
+        "control.radius.sm",
+        "control.type.caption.size",
+        "control.type.caption.weight",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "allowedRiskLevels": [
+        "high",
+        "external-code"
+      ],
+      "usageRules": [
+        "MUST appear on bridge.ui.agent.prompt section header",
+        "MUST visually separate agent from IDE modules"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT use on primary status or workspace modules"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-module-composition-rules.md",
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.badge.count",
+      "displayName": "Count Chip",
+      "category": "feedback",
+      "description": "Numeric chip for problems counts, git summary, and editor metrics.",
+      "linkedPreviewSection": [
+        "S06",
+        "S11"
+      ],
+      "requiredStates": [
+        "empty"
+      ],
+      "requiredTokens": [
+        "control.color.danger",
+        "control.color.warn",
+        "control.color.textMuted",
+        "control.color.surface",
+        "control.radius.sm",
+        "control.type.caption.size",
+        "control.type.caption.weight"
+      ],
+      "allowedRiskLevels": [
+        "read-only",
+        "low",
+        "medium",
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST use danger for errors count, warn for warnings",
+        "SHOULD hide or show zero state via empty module state"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT imply actionable destructive behavior from count alone"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-state-display-rules.md",
+        "docs/global-design/control-rules/global-control-design-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.riskBanner.externalCode",
+      "displayName": "External-Code Banner",
+      "category": "risk",
+      "description": "Persistent warning banner for extension install and external-code actions.",
+      "linkedPreviewSection": [
+        "S07",
+        "S08"
+      ],
+      "requiredStates": [
+        "external-code-warning"
+      ],
+      "requiredTokens": [
+        "control.color.warn",
+        "control.color.surfaceElevated",
+        "control.color.text",
+        "control.color.border",
+        "control.space.md",
+        "control.type.label.size",
+        "control.type.label.weight",
+        "control.type.body.size",
+        "control.type.body.weight"
+      ],
+      "allowedRiskLevels": [
+        "external-code"
+      ],
+      "usageRules": [
+        "MUST appear above confirm buttons in extension.install flows",
+        "MUST remain visible until dialog dismissed"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT use for normal read-only modules"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.riskBanner.destructive",
+      "displayName": "Destructive Banner",
+      "category": "risk",
+      "description": "Inline warning for destructive or overwrite operations before confirmation.",
+      "linkedPreviewSection": [
+        "S07",
+        "S08"
+      ],
+      "requiredStates": [
+        "confirmation-required"
+      ],
+      "requiredTokens": [
+        "control.color.danger",
+        "control.color.surfaceElevated",
+        "control.color.text",
+        "control.space.md",
+        "control.type.label.size",
+        "control.type.label.weight",
+        "control.type.body.size",
+        "control.type.body.weight"
+      ],
+      "allowedRiskLevels": [
+        "destructive",
+        "medium-high",
+        "high"
+      ],
+      "usageRules": [
+        "MUST precede destructive confirm in terminal and overwrite flows"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT use ok color for destructive emphasis"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.dialog.confirm",
+      "displayName": "Confirmation Dialog",
+      "category": "cross-cutting",
+      "description": "Modal confirmation for actions requiring user approval.",
+      "linkedPreviewSection": [
+        "S08",
+        "S15"
+      ],
+      "requiredStates": [
+        "confirmation-required",
+        "disabled",
+        "loading"
+      ],
+      "requiredTokens": [
+        "control.color.surfaceElevated",
+        "control.color.text",
+        "control.color.danger",
+        "control.color.warn",
+        "control.color.border",
+        "control.radius.xl",
+        "control.space.md",
+        "control.space.lg",
+        "control.touch.min"
+      ],
+      "allowedRiskLevels": [
+        "medium",
+        "high",
+        "destructive",
+        "external-code"
+      ],
+      "usageRules": [
+        "MUST bind to bridge.ui.confirmation.dialog module",
+        "MUST show actionId, riskClass, and effect summary",
+        "MUST NOT allow double-submit during loading"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT use for read-only actions",
+        "MUST NOT use ok-green primary for restore/caution flows"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md",
+        "docs/global-design/control-rules/global-mobile-control-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.dialog.sheet",
+      "displayName": "Confirmation Sheet",
+      "category": "cross-cutting",
+      "description": "Mobile sheet/fullscreen narrow variant of confirmation dialog.",
+      "linkedPreviewSection": [
+        "S08",
+        "S15"
+      ],
+      "requiredStates": [
+        "confirmation-required",
+        "loading"
+      ],
+      "requiredTokens": [
+        "control.color.surfaceElevated",
+        "control.color.text",
+        "control.color.border",
+        "control.radius.xl",
+        "control.space.lg",
+        "control.touch.min"
+      ],
+      "allowedRiskLevels": [
+        "medium",
+        "high",
+        "destructive",
+        "external-code"
+      ],
+      "usageRules": [
+        "SHOULD be used on narrow viewports per mobile rules",
+        "MUST preserve Cancel visibility"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT remove confirm copy on mobile"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-mobile-control-rules.md",
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.permissionGate.wrapper",
+      "displayName": "Permission Gate Wrapper",
+      "category": "cross-cutting",
+      "description": "UI wrapper that blocks render and submit when permissions or allowlists fail.",
+      "linkedPreviewSection": [
+        "S09"
+      ],
+      "requiredStates": [
+        "permission-denied",
+        "disabled",
+        "blocked"
+      ],
+      "requiredTokens": [
+        "control.color.surface",
+        "control.color.textMuted",
+        "control.color.danger",
+        "control.color.border",
+        "control.space.md",
+        "control.touch.min",
+        "control.opacity.disabled"
+      ],
+      "allowedRiskLevels": [
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST wrap child modules in bridge.ui.permission.gate",
+        "MUST block submit when permission denied",
+        "MUST complement API Security Gate, not replace it"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT silently hide modules without blocked state explanation"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md",
+        "docs/global-design/control-rules/global-control-design-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.errorInline",
+      "displayName": "Inline Error",
+      "category": "cross-cutting",
+      "description": "Compact inline error for module-level failures and validation.",
+      "linkedPreviewSection": [
+        "S06",
+        "S17"
+      ],
+      "requiredStates": [
+        "error"
+      ],
+      "requiredTokens": [
+        "control.color.danger",
+        "control.color.text",
+        "control.color.textMuted",
+        "control.space.sm",
+        "control.type.body.size",
+        "control.type.body.weight",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "allowedRiskLevels": [
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST show errorCode when provided by API",
+        "SHOULD offer retry when safe"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT replace permission denied blocked panel when gate blocks entire module"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-state-display-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.errorBlocked",
+      "displayName": "Blocked State Panel",
+      "category": "cross-cutting",
+      "description": "Full blocked panel for permission denied and allowlist violations.",
+      "linkedPreviewSection": [
+        "S09",
+        "S17"
+      ],
+      "requiredStates": [
+        "blocked",
+        "permission-denied",
+        "error"
+      ],
+      "requiredTokens": [
+        "control.color.danger",
+        "control.color.surface",
+        "control.color.textMuted",
+        "control.space.md",
+        "control.type.body.size",
+        "control.type.body.weight",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "allowedRiskLevels": [
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST explain missing permission or allowlist violation",
+        "MUST NOT show action submit CTAs"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT use for transient network errors without blocked semantics"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-state-display-rules.md",
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.actionResult.toast",
+      "displayName": "Action Result Toast",
+      "category": "cross-cutting",
+      "description": "Transient toast for action success, warning, or partial success.",
+      "linkedPreviewSection": [
+        "S06",
+        "S12"
+      ],
+      "requiredStates": [
+        "success",
+        "warning",
+        "partial-success"
+      ],
+      "requiredTokens": [
+        "control.color.ok",
+        "control.color.warn",
+        "control.color.surfaceElevated",
+        "control.color.text",
+        "control.space.md",
+        "control.type.body.size",
+        "control.type.body.weight"
+      ],
+      "allowedRiskLevels": [
+        "n/a"
+      ],
+      "usageRules": [
+        "SHOULD auto-dismiss within 5 seconds",
+        "MUST allow manual dismiss",
+        "MUST show snapshotId without implying restore when rollback unavailable"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT show restore button when rollbackAvailable is false"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-state-display-rules.md",
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.actionResult.detail",
+      "displayName": "Action Result Detail",
+      "category": "cross-cutting",
+      "description": "Expandable detail sheet for action outcomes including methodUsed and snapshotId.",
+      "linkedPreviewSection": [
+        "S12"
+      ],
+      "requiredStates": [
+        "success",
+        "warning",
+        "restore-available",
+        "restore-unavailable"
+      ],
+      "requiredTokens": [
+        "control.color.surfaceElevated",
+        "control.color.text",
+        "control.color.textMuted",
+        "control.color.warn",
+        "control.color.ok",
+        "control.space.md",
+        "control.type.body.size",
+        "control.type.body.weight",
+        "control.type.mono.family",
+        "control.type.mono.size"
+      ],
+      "allowedRiskLevels": [
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST use caution styling for restore-available, not success green",
+        "MUST link to audit entry when available"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT label restore unavailable as success"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md",
+        "docs/global-design/control-rules/global-state-display-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.skeleton.block",
+      "displayName": "Skeleton Block",
+      "category": "feedback",
+      "description": "Placeholder skeleton for module body loading per MO-003 decision.",
+      "linkedPreviewSection": [
+        "S06"
+      ],
+      "requiredStates": [
+        "loading"
+      ],
+      "requiredTokens": [
+        "control.color.textMuted",
+        "control.color.surface",
+        "control.radius.md",
+        "control.space.md"
+      ],
+      "allowedRiskLevels": [
+        "n/a"
+      ],
+      "usageRules": [
+        "SHOULD be default loading pattern for module cards",
+        "MUST NOT shrink layout more than 8px vs loaded state"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT replace button inline loading spinner on submit"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-state-display-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.list.auditRow",
+      "displayName": "Audit History Row",
+      "category": "feedback",
+      "description": "Single audit log row with timestamp, actionId, riskClass, and outcome.",
+      "linkedPreviewSection": [
+        "S10"
+      ],
+      "requiredStates": [
+        "loading"
+      ],
+      "requiredTokens": [
+        "control.color.surface",
+        "control.color.text",
+        "control.color.textMuted",
+        "control.color.danger",
+        "control.color.warn",
+        "control.space.sm",
+        "control.type.caption.size",
+        "control.type.caption.weight",
+        "control.type.mono.family",
+        "control.type.mono.size"
+      ],
+      "allowedRiskLevels": [
+        "read-only",
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST show riskClass badge per row",
+        "MUST redact secrets and hash sensitive values",
+        "MUST order newest first"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT display prompt or settings values in plaintext"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md",
+        "docs/global-design/control-rules/global-control-design-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.list.empty",
+      "displayName": "Empty State",
+      "category": "feedback",
+      "description": "Empty list or module state with muted copy and optional hint.",
+      "linkedPreviewSection": [
+        "S06",
+        "S10"
+      ],
+      "requiredStates": [
+        "empty"
+      ],
+      "requiredTokens": [
+        "control.color.textMuted",
+        "control.color.surface",
+        "control.space.md",
+        "control.type.body.size",
+        "control.type.body.weight",
+        "control.type.caption.size",
+        "control.type.caption.weight"
+      ],
+      "allowedRiskLevels": [
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST explain why empty and what user can do next if applicable"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT mimic error styling for benign empty data"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-state-display-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.footer.meta",
+      "displayName": "Footer Meta",
+      "category": "layout",
+      "description": "Footer typography block for version and capability metadata.",
+      "linkedPreviewSection": [
+        "S11",
+        "S16"
+      ],
+      "requiredStates": [
+        "loading",
+        "error"
+      ],
+      "requiredTokens": [
+        "control.color.textMuted",
+        "control.type.caption.size",
+        "control.type.caption.weight",
+        "control.space.sm"
+      ],
+      "allowedRiskLevels": [
+        "read-only",
+        "low",
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST appear at stack footer for bridge.ui.version.info",
+        "MUST reflect snapshotRestoreAvailable from API truthfully"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT claim restore available when API says false"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-module-composition-rules.md",
+        "docs/global-design/control-rules/global-control-design-rules.md"
+      ]
+    },
+    {
+      "id": "control.component.grid.shortcut",
+      "displayName": "Shortcut Grid",
+      "category": "layout",
+      "description": "Touch grid of allowlisted panel or command shortcuts.",
+      "linkedPreviewSection": [
+        "S11",
+        "S13"
+      ],
+      "requiredStates": [
+        "disabled"
+      ],
+      "requiredTokens": [
+        "control.color.surface",
+        "control.color.accent",
+        "control.color.border",
+        "control.space.sm",
+        "control.space.md",
+        "control.touch.min",
+        "control.radius.md",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "allowedRiskLevels": [
+        "medium"
+      ],
+      "usageRules": [
+        "MUST use allowlisted shortcuts only",
+        "MUST meet touch target per cell"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT add arbitrary panel commands outside allowlist"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-module-composition-rules.md",
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    }
+  ],
+  "patterns": [
+    {
+      "id": "control.pattern.confirm.destructive",
+      "displayName": "Destructive Confirm Pattern",
+      "category": "pattern",
+      "description": "Confirmation layout with danger primary and destructive copy for terminal and high-risk commands.",
+      "linkedPreviewSection": [
+        "S08"
+      ],
+      "requiredStates": [
+        "confirmation-required",
+        "loading"
+      ],
+      "requiredTokens": [
+        "control.color.danger",
+        "control.color.text",
+        "control.color.surfaceElevated",
+        "control.touch.min"
+      ],
+      "allowedRiskLevels": [
+        "destructive",
+        "high"
+      ],
+      "usageRules": [
+        "MUST use danger primary confirm button",
+        "MUST always show Cancel"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT use accent primary for destructive confirm"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.pattern.confirm.externalCode",
+      "displayName": "External-Code Confirm Pattern",
+      "category": "pattern",
+      "description": "Confirmation with persistent external-code banner above action buttons.",
+      "linkedPreviewSection": [
+        "S08"
+      ],
+      "requiredStates": [
+        "external-code-warning",
+        "confirmation-required"
+      ],
+      "requiredTokens": [
+        "control.color.warn",
+        "control.color.danger",
+        "control.color.surfaceElevated"
+      ],
+      "allowedRiskLevels": [
+        "external-code"
+      ],
+      "usageRules": [
+        "MUST include external-code banner component",
+        "MUST explain install/run risks"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT omit banner for extension.install"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.pattern.confirm.restore",
+      "displayName": "Restore Confirm Pattern",
+      "category": "pattern",
+      "description": "Caution-styled confirmation for snapshot restore showing snapshotId.",
+      "linkedPreviewSection": [
+        "S08",
+        "S12"
+      ],
+      "requiredStates": [
+        "confirmation-required",
+        "restore-available"
+      ],
+      "requiredTokens": [
+        "control.color.warn",
+        "control.color.text",
+        "control.type.mono.family",
+        "control.type.mono.size",
+        "control.color.surfaceElevated"
+      ],
+      "allowedRiskLevels": [
+        "medium",
+        "high"
+      ],
+      "usageRules": [
+        "MUST show snapshotId line",
+        "MUST use caution not success green"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT show restore confirm when rollbackAvailable is false"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.pattern.confirm.normal",
+      "displayName": "Normal Confirm Pattern",
+      "category": "pattern",
+      "description": "Standard confirmation for medium-risk actions such as workspace open and settings set.",
+      "linkedPreviewSection": [
+        "S08"
+      ],
+      "requiredStates": [
+        "confirmation-required"
+      ],
+      "requiredTokens": [
+        "control.color.accent",
+        "control.color.surfaceElevated",
+        "control.color.text",
+        "control.touch.min"
+      ],
+      "allowedRiskLevels": [
+        "medium",
+        "normal"
+      ],
+      "usageRules": [
+        "MAY use primary accent confirm",
+        "MUST show action summary"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT use for destructive terminal commands"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-risk-interaction-rules.md"
+      ]
+    },
+    {
+      "id": "control.pattern.module.collapsed",
+      "displayName": "Collapsed Module Pattern",
+      "category": "pattern",
+      "description": "Module section showing header only with chevron; body hidden.",
+      "linkedPreviewSection": [
+        "S11"
+      ],
+      "requiredStates": [
+        "disabled"
+      ],
+      "requiredTokens": [
+        "control.color.surface",
+        "control.color.textMuted",
+        "control.space.md",
+        "control.type.title.size",
+        "control.type.title.weight"
+      ],
+      "allowedRiskLevels": [
+        "read-only",
+        "normal",
+        "medium",
+        "n/a"
+      ],
+      "usageRules": [
+        "SHOULD be default for editor, panels, git, problems modules",
+        "MUST keep header touch target accessible"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT hide status module at stack top"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-module-composition-rules.md"
+      ]
+    },
+    {
+      "id": "control.pattern.module.expanded",
+      "displayName": "Expanded Module Pattern",
+      "category": "pattern",
+      "description": "Module section with full body visible.",
+      "linkedPreviewSection": [
+        "S11",
+        "S14"
+      ],
+      "requiredStates": [
+        "loading",
+        "error"
+      ],
+      "requiredTokens": [
+        "control.color.surface",
+        "control.space.md",
+        "control.space.lg"
+      ],
+      "allowedRiskLevels": [
+        "read-only",
+        "normal",
+        "medium",
+        "high",
+        "destructive",
+        "external-code",
+        "n/a"
+      ],
+      "usageRules": [
+        "MUST be used when user expands collapsed module",
+        "MUST be default for agent subsystem section when active"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT expand all modules by default (monolith effect)"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-module-composition-rules.md"
+      ]
+    },
+    {
+      "id": "control.pattern.loading.skeleton",
+      "displayName": "Skeleton Loading Pattern",
+      "category": "pattern",
+      "description": "Module-level skeleton loading per MO-003 global decision.",
+      "linkedPreviewSection": [
+        "S06"
+      ],
+      "requiredStates": [
+        "loading"
+      ],
+      "requiredTokens": [
+        "control.color.textMuted",
+        "control.color.surface",
+        "control.space.md"
+      ],
+      "allowedRiskLevels": [
+        "n/a"
+      ],
+      "usageRules": [
+        "SHOULD be preferred over spinner for module card bodies",
+        "MUST apply to bridge.ui.cursor.status and audit.history"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT be only loading indicator on submitting buttons"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-state-display-rules.md",
+        "docs/global-design/control-rules/global-control-design-open-questions.md"
+      ]
+    },
+    {
+      "id": "control.pattern.loading.spinnerInline",
+      "displayName": "Inline Spinner Pattern",
+      "category": "pattern",
+      "description": "Inline spinner on action submit buttons during in-flight requests.",
+      "linkedPreviewSection": [
+        "S05"
+      ],
+      "requiredStates": [
+        "loading",
+        "running"
+      ],
+      "requiredTokens": [
+        "control.color.accent",
+        "control.color.textMuted",
+        "control.touch.min"
+      ],
+      "allowedRiskLevels": [
+        "n/a"
+      ],
+      "usageRules": [
+        "SHOULD be used on button during action submit",
+        "MUST NOT shrink button below control.touch.min"
+      ],
+      "forbiddenUsage": [
+        "MUST NOT replace module skeleton for initial module load"
+      ],
+      "sourceRuleFiles": [
+        "docs/global-design/control-rules/global-state-display-rules.md",
+        "docs/global-design/control-rules/global-control-design-open-questions.md"
+      ]
+    }
+  ]
+}

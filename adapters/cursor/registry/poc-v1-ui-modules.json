@@ -1,0 +1,853 @@
+{
+  "schemaVersion": "poc-v1-ui-modules-1.0.0",
+  "registryVersion": "poc-v1.3.0",
+  "adapterId": "cursor",
+  "runtimeActive": true,
+  "designrulesStatus": "consumer-ready",
+  "linkedCatalog": "docs/global-design/control-rules/tokens/control.components.json",
+  "linkedCrosswalk": "docs/global-design/control-rules/p2-module-token-crosswalk.md",
+  "viewComposition": {
+    "viewId": "BridgeMobileView.cursor",
+    "layout": "vertical-stack",
+    "forbidden": "monolithic-cursor-control-page",
+    "moduleOrder": [
+      "bridge.ui.permission.gate",
+      "bridge.ui.cursor.status",
+      "bridge.ui.workspace",
+      "bridge.ui.editor",
+      "bridge.ui.file.create",
+      "bridge.ui.settings",
+      "bridge.ui.extension.install",
+      "bridge.ui.terminal.command",
+      "bridge.ui.ide.command",
+      "bridge.ui.panels",
+      "bridge.ui.git.status",
+      "bridge.ui.problems",
+      "bridge.ui.agent.prompt",
+      "bridge.ui.audit.history",
+      "bridge.ui.version.info"
+    ],
+    "crossCuttingModules": [
+      "bridge.ui.confirmation.dialog",
+      "bridge.ui.action.result",
+      "bridge.ui.error.state"
+    ]
+  },
+  "modules": [
+    {
+      "moduleId": "bridge.ui.permission.gate",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "cross-cutting",
+      "uiRiskLevel": "n/a",
+      "riskVisibility": "none",
+      "requiredPermissions": [],
+      "supportedActions": [],
+      "requiredDesignTokens": [
+        "control.color.surface",
+        "control.color.textMuted",
+        "control.color.danger",
+        "control.color.border",
+        "control.space.md",
+        "control.touch.min",
+        "control.opacity.disabled"
+      ],
+      "requiredComponents": [
+        "control.component.permissionGate.wrapper",
+        "control.component.errorBlocked"
+      ],
+      "requiredStates": [
+        "permission-denied",
+        "disabled",
+        "blocked"
+      ],
+      "linkedPreviewSections": [
+        "S09",
+        "S17"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.cursor.status",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "status",
+      "uiRiskLevel": "low",
+      "riskVisibility": "none",
+      "requiredPermissions": [
+        "read"
+      ],
+      "supportedActions": [
+        "cursor.ide.status.get"
+      ],
+      "requiredDesignTokens": [
+        "control.color.bg",
+        "control.color.surface",
+        "control.color.text",
+        "control.color.textMuted",
+        "control.color.accent",
+        "control.color.ok",
+        "control.color.warn",
+        "control.color.danger",
+        "control.space.md",
+        "control.space.lg",
+        "control.radius.lg",
+        "control.type.title.size",
+        "control.type.title.weight",
+        "control.type.body.size",
+        "control.type.body.weight",
+        "control.type.caption.size",
+        "control.type.caption.weight"
+      ],
+      "requiredComponents": [
+        "control.component.card.status",
+        "control.component.skeleton.block",
+        "control.component.list.empty",
+        "control.component.errorInline",
+        "control.pattern.module.collapsed",
+        "control.pattern.loading.skeleton"
+      ],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "disabled",
+        "unreachable"
+      ],
+      "linkedPreviewSections": [
+        "S06",
+        "S11",
+        "S15"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.workspace",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "workspace",
+      "uiRiskLevel": "medium",
+      "riskVisibility": "badge",
+      "requiredPermissions": [
+        "workspace"
+      ],
+      "supportedActions": [
+        "cursor.ide.workspace.open"
+      ],
+      "requiredDesignTokens": [
+        "control.color.accent",
+        "control.color.surface",
+        "control.color.border",
+        "control.space.md",
+        "control.touch.min",
+        "control.radius.lg",
+        "control.type.label.size",
+        "control.type.label.weight",
+        "control.type.body.size",
+        "control.type.body.weight"
+      ],
+      "requiredComponents": [
+        "control.component.moduleSection",
+        "control.component.moduleSection.header",
+        "control.component.form.pathInput",
+        "control.component.button.primary",
+        "control.component.button.secondary",
+        "control.component.dialog.confirm",
+        "control.pattern.confirm.normal",
+        "control.pattern.loading.spinnerInline"
+      ],
+      "requiredStates": [
+        "loading",
+        "confirmation-required",
+        "success",
+        "error",
+        "disabled"
+      ],
+      "linkedPreviewSections": [
+        "S05",
+        "S08",
+        "S11",
+        "S13"
+      ],
+      "implementationPhase": "P2",
+      "rollbackUndoVisibility": {
+        "visible": false,
+        "reason": "rollbackAvailable false in P0"
+      }
+    },
+    {
+      "moduleId": "bridge.ui.editor",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "editor",
+      "uiRiskLevel": "low",
+      "riskVisibility": "none",
+      "requiredPermissions": [
+        "read"
+      ],
+      "supportedActions": [],
+      "requiredDesignTokens": [
+        "control.color.surface",
+        "control.color.text",
+        "control.color.textMuted",
+        "control.space.md",
+        "control.radius.lg",
+        "control.type.body.size",
+        "control.type.body.weight",
+        "control.type.mono.family",
+        "control.type.mono.size"
+      ],
+      "requiredComponents": [
+        "control.component.card.surface",
+        "control.component.badge.count",
+        "control.pattern.module.collapsed",
+        "control.component.list.empty",
+        "control.component.errorInline",
+        "control.pattern.loading.skeleton"
+      ],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "disabled"
+      ],
+      "linkedPreviewSections": [
+        "S04",
+        "S06",
+        "S11"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.file.create",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "filesystem",
+      "uiRiskLevel": "medium-high",
+      "riskVisibility": "confirmation",
+      "requiredPermissions": [
+        "fs-write"
+      ],
+      "supportedActions": [
+        "cursor.ide.fs.mkdir",
+        "cursor.ide.fs.write"
+      ],
+      "requiredDesignTokens": [
+        "control.color.danger",
+        "control.color.warn",
+        "control.color.surface",
+        "control.space.md",
+        "control.touch.min",
+        "control.type.mono.family",
+        "control.type.mono.size",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "requiredComponents": [
+        "control.component.moduleSection",
+        "control.component.moduleSection.header",
+        "control.component.form.pathInput",
+        "control.component.form.textArea",
+        "control.component.button.primary",
+        "control.component.button.danger",
+        "control.component.dialog.confirm",
+        "control.pattern.confirm.normal",
+        "control.component.riskBanner.destructive",
+        "control.pattern.loading.spinnerInline"
+      ],
+      "requiredStates": [
+        "loading",
+        "confirmation-required",
+        "success",
+        "error",
+        "disabled"
+      ],
+      "linkedPreviewSections": [
+        "S05",
+        "S08",
+        "S11",
+        "S13"
+      ],
+      "implementationPhase": "P2",
+      "rollbackUndoVisibility": {
+        "visible": false,
+        "reason": "P0 rollbackAvailable false"
+      }
+    },
+    {
+      "moduleId": "bridge.ui.settings",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "settings",
+      "uiRiskLevel": "medium",
+      "riskVisibility": "badge",
+      "requiredPermissions": [
+        "read",
+        "settings"
+      ],
+      "supportedActions": [
+        "cursor.ide.settings.get",
+        "cursor.ide.settings.set"
+      ],
+      "requiredDesignTokens": [
+        "control.color.accent",
+        "control.color.surface",
+        "control.space.md",
+        "control.touch.min",
+        "control.type.label.size",
+        "control.type.label.weight",
+        "control.type.body.size",
+        "control.type.body.weight"
+      ],
+      "requiredComponents": [
+        "control.component.moduleSection",
+        "control.component.moduleSection.header",
+        "control.component.form.textInput",
+        "control.component.form.selectAllowlist",
+        "control.component.button.primary",
+        "control.component.button.secondary",
+        "control.component.dialog.confirm",
+        "control.pattern.confirm.normal",
+        "control.pattern.loading.spinnerInline"
+      ],
+      "requiredStates": [
+        "loading",
+        "confirmation-required",
+        "success",
+        "error",
+        "disabled"
+      ],
+      "linkedPreviewSections": [
+        "S05",
+        "S08",
+        "S13"
+      ],
+      "implementationPhase": "P2",
+      "rollbackUndoVisibility": {
+        "visible": false,
+        "reason": "P0.1 for rollback action"
+      }
+    },
+    {
+      "moduleId": "bridge.ui.extension.install",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "extensions",
+      "uiRiskLevel": "external-code",
+      "riskVisibility": "banner",
+      "requiredPermissions": [
+        "extension-manage"
+      ],
+      "supportedActions": [
+        "cursor.ide.extension.install"
+      ],
+      "requiredDesignTokens": [
+        "control.color.warn",
+        "control.color.danger",
+        "control.color.surfaceElevated",
+        "control.space.md",
+        "control.touch.min",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "requiredComponents": [
+        "control.component.moduleSection",
+        "control.component.moduleSection.header",
+        "control.component.form.textInput",
+        "control.component.button.danger",
+        "control.component.riskBanner.externalCode",
+        "control.component.dialog.confirm",
+        "control.component.dialog.sheet",
+        "control.pattern.confirm.externalCode",
+        "control.component.badge.risk",
+        "control.pattern.loading.spinnerInline"
+      ],
+      "requiredStates": [
+        "external-code-warning",
+        "confirmation-required",
+        "running",
+        "success",
+        "error",
+        "disabled"
+      ],
+      "linkedPreviewSections": [
+        "S07",
+        "S08",
+        "S13"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.terminal.command",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "terminal",
+      "uiRiskLevel": "destructive",
+      "riskVisibility": "confirmation",
+      "requiredPermissions": [
+        "terminal"
+      ],
+      "supportedActions": [
+        "cursor.ide.terminal.run"
+      ],
+      "requiredDesignTokens": [
+        "control.color.danger",
+        "control.color.text",
+        "control.type.mono.family",
+        "control.type.mono.size",
+        "control.space.md",
+        "control.touch.min",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "requiredComponents": [
+        "control.component.moduleSection",
+        "control.component.moduleSection.header",
+        "control.component.form.selectAllowlist",
+        "control.component.form.pathInput",
+        "control.component.button.danger",
+        "control.component.dialog.confirm",
+        "control.pattern.confirm.destructive",
+        "control.component.riskBanner.destructive",
+        "control.component.badge.risk",
+        "control.pattern.loading.spinnerInline"
+      ],
+      "requiredStates": [
+        "loading",
+        "confirmation-required",
+        "running",
+        "failed",
+        "disabled"
+      ],
+      "linkedPreviewSections": [
+        "S07",
+        "S08",
+        "S13"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.ide.command",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "commands",
+      "uiRiskLevel": "high",
+      "riskVisibility": "confirmation",
+      "requiredPermissions": [
+        "command-exec"
+      ],
+      "supportedActions": [
+        "cursor.ide.command.execute"
+      ],
+      "requiredDesignTokens": [
+        "control.color.danger",
+        "control.color.accent",
+        "control.space.md",
+        "control.touch.min",
+        "control.type.mono.family",
+        "control.type.mono.size",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "requiredComponents": [
+        "control.component.moduleSection",
+        "control.component.moduleSection.header",
+        "control.component.form.selectAllowlist",
+        "control.component.button.danger",
+        "control.component.dialog.confirm",
+        "control.pattern.confirm.destructive",
+        "control.component.badge.risk",
+        "control.pattern.loading.spinnerInline"
+      ],
+      "requiredStates": [
+        "loading",
+        "confirmation-required",
+        "running",
+        "success",
+        "error",
+        "disabled"
+      ],
+      "linkedPreviewSections": [
+        "S07",
+        "S08",
+        "S13"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.panels",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "panels",
+      "uiRiskLevel": "medium",
+      "riskVisibility": "badge",
+      "requiredPermissions": [
+        "command-exec"
+      ],
+      "supportedActions": [],
+      "requiredDesignTokens": [
+        "control.color.surface",
+        "control.color.accent",
+        "control.space.sm",
+        "control.space.md",
+        "control.touch.min",
+        "control.radius.md",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "requiredComponents": [
+        "control.component.moduleSection",
+        "control.component.moduleSection.header",
+        "control.component.grid.shortcut",
+        "control.component.button.secondary",
+        "control.component.dialog.confirm",
+        "control.pattern.confirm.normal",
+        "control.pattern.module.collapsed",
+        "control.pattern.loading.spinnerInline"
+      ],
+      "requiredStates": [
+        "loading",
+        "confirmation-required",
+        "success",
+        "error",
+        "disabled"
+      ],
+      "linkedPreviewSections": [
+        "S05",
+        "S08",
+        "S11",
+        "S13"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.git.status",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "git",
+      "uiRiskLevel": "medium",
+      "riskVisibility": "badge",
+      "requiredPermissions": [
+        "read",
+        "terminal"
+      ],
+      "supportedActions": [],
+      "requiredDesignTokens": [
+        "control.color.surface",
+        "control.color.textMuted",
+        "control.color.ok",
+        "control.color.warn",
+        "control.space.md",
+        "control.type.body.size",
+        "control.type.body.weight",
+        "control.type.caption.size",
+        "control.type.caption.weight"
+      ],
+      "requiredComponents": [
+        "control.component.card.surface",
+        "control.component.badge.count",
+        "control.component.list.empty",
+        "control.pattern.module.collapsed",
+        "control.component.errorInline",
+        "control.pattern.loading.skeleton"
+      ],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "disabled"
+      ],
+      "linkedPreviewSections": [
+        "S06",
+        "S11",
+        "S13"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.problems",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "diagnostics",
+      "uiRiskLevel": "low",
+      "riskVisibility": "none",
+      "requiredPermissions": [
+        "read",
+        "command-exec"
+      ],
+      "supportedActions": [],
+      "requiredDesignTokens": [
+        "control.color.danger",
+        "control.color.warn",
+        "control.color.surface",
+        "control.space.md",
+        "control.type.label.size",
+        "control.type.label.weight",
+        "control.type.caption.size",
+        "control.type.caption.weight"
+      ],
+      "requiredComponents": [
+        "control.component.card.surface",
+        "control.component.badge.count",
+        "control.component.button.secondary",
+        "control.component.list.empty",
+        "control.pattern.module.collapsed",
+        "control.pattern.loading.skeleton"
+      ],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "disabled"
+      ],
+      "linkedPreviewSections": [
+        "S06",
+        "S11"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.agent.prompt",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "agent-subsystem",
+      "uiRiskLevel": "high",
+      "riskVisibility": "confirmation",
+      "requiredPermissions": [
+        "agent-run"
+      ],
+      "supportedActions": [
+        "cursor.agent.prompt.send"
+      ],
+      "requiredDesignTokens": [
+        "control.color.surfaceElevated",
+        "control.color.warn",
+        "control.color.danger",
+        "control.color.border",
+        "control.space.lg",
+        "control.touch.min",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "requiredComponents": [
+        "control.component.moduleSection",
+        "control.component.moduleSection.header",
+        "control.component.badge.subsystem",
+        "control.component.form.textArea",
+        "control.component.form.toggle",
+        "control.component.button.danger",
+        "control.component.dialog.confirm",
+        "control.component.dialog.sheet",
+        "control.pattern.confirm.destructive",
+        "control.pattern.module.expanded",
+        "control.pattern.loading.spinnerInline"
+      ],
+      "requiredStates": [
+        "confirmation-required",
+        "running",
+        "success",
+        "failed",
+        "disabled"
+      ],
+      "linkedPreviewSections": [
+        "S07",
+        "S08",
+        "S14",
+        "S15"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.audit.history",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "audit",
+      "uiRiskLevel": "read-only",
+      "riskVisibility": "badge",
+      "requiredPermissions": [
+        "read"
+      ],
+      "supportedActions": [],
+      "requiredDesignTokens": [
+        "control.color.surface",
+        "control.color.textMuted",
+        "control.color.danger",
+        "control.color.warn",
+        "control.space.sm",
+        "control.type.caption.size",
+        "control.type.caption.weight",
+        "control.type.mono.family",
+        "control.type.mono.size"
+      ],
+      "requiredComponents": [
+        "control.component.list.auditRow",
+        "control.component.badge.risk",
+        "control.component.list.empty",
+        "control.component.skeleton.block",
+        "control.component.errorInline",
+        "control.pattern.loading.skeleton"
+      ],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error"
+      ],
+      "linkedPreviewSections": [
+        "S10"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.version.info",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "meta",
+      "uiRiskLevel": "low",
+      "riskVisibility": "none",
+      "requiredPermissions": [
+        "read"
+      ],
+      "supportedActions": [],
+      "requiredDesignTokens": [
+        "control.color.textMuted",
+        "control.type.caption.size",
+        "control.type.caption.weight",
+        "control.space.sm"
+      ],
+      "requiredComponents": [
+        "control.component.footer.meta"
+      ],
+      "requiredStates": [
+        "loading",
+        "error"
+      ],
+      "linkedPreviewSections": [
+        "S11",
+        "S16"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.confirmation.dialog",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "cross-cutting",
+      "uiRiskLevel": "inherit",
+      "riskVisibility": "none",
+      "requiredPermissions": [],
+      "supportedActions": [],
+      "requiredDesignTokens": [
+        "control.color.surfaceElevated",
+        "control.color.danger",
+        "control.color.warn",
+        "control.color.text",
+        "control.color.border",
+        "control.radius.xl",
+        "control.space.lg",
+        "control.touch.min",
+        "control.type.label.size",
+        "control.type.label.weight",
+        "control.type.body.size",
+        "control.type.body.weight"
+      ],
+      "requiredComponents": [
+        "control.component.dialog.confirm",
+        "control.component.dialog.sheet",
+        "control.component.riskBanner.externalCode",
+        "control.component.riskBanner.destructive",
+        "control.component.button.danger",
+        "control.component.button.secondary",
+        "control.pattern.confirm.destructive",
+        "control.pattern.confirm.externalCode",
+        "control.pattern.confirm.restore",
+        "control.pattern.confirm.normal",
+        "control.pattern.loading.spinnerInline"
+      ],
+      "requiredStates": [
+        "confirmation-required",
+        "loading",
+        "disabled"
+      ],
+      "linkedPreviewSections": [
+        "S08",
+        "S15"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.action.result",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "cross-cutting",
+      "uiRiskLevel": "n/a",
+      "riskVisibility": "badge",
+      "requiredPermissions": [],
+      "supportedActions": [],
+      "requiredDesignTokens": [
+        "control.color.ok",
+        "control.color.warn",
+        "control.color.surfaceElevated",
+        "control.space.md",
+        "control.type.body.size",
+        "control.type.body.weight",
+        "control.type.mono.family",
+        "control.type.mono.size"
+      ],
+      "requiredComponents": [
+        "control.component.actionResult.toast",
+        "control.component.actionResult.detail",
+        "control.component.badge.risk"
+      ],
+      "requiredStates": [
+        "success",
+        "warning",
+        "partial-success",
+        "restore-available",
+        "restore-unavailable"
+      ],
+      "linkedPreviewSections": [
+        "S06",
+        "S12"
+      ],
+      "implementationPhase": "P2"
+    },
+    {
+      "moduleId": "bridge.ui.error.state",
+      "moduleVersion": "1.0.0",
+      "enabled": true,
+      "category": "cross-cutting",
+      "uiRiskLevel": "n/a",
+      "riskVisibility": "blocked",
+      "requiredPermissions": [],
+      "supportedActions": [],
+      "requiredDesignTokens": [
+        "control.color.danger",
+        "control.color.text",
+        "control.color.textMuted",
+        "control.space.md",
+        "control.type.body.size",
+        "control.type.body.weight",
+        "control.type.label.size",
+        "control.type.label.weight"
+      ],
+      "requiredComponents": [
+        "control.component.errorInline",
+        "control.component.errorBlocked",
+        "control.component.button.secondary"
+      ],
+      "requiredStates": [
+        "error",
+        "blocked",
+        "permission-denied",
+        "offline",
+        "unreachable"
+      ],
+      "linkedPreviewSections": [
+        "S06",
+        "S09",
+        "S17"
+      ],
+      "implementationPhase": "P2"
+    }
+  ]
+}
