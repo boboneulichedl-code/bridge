@@ -135,6 +135,26 @@ describe("Step 7 — meta endpoints", () => {
     expect(byId["cursor.ide.workspace.open"]).toBe(false);
   });
 
+  it("ui-modules returns P2 registry metadata without doc paths", async () => {
+    const r = await callCursorApi("GET", `${CURSOR_API_SPEC}/ui-modules`);
+    expect(r.status).toBe(200);
+    expect(r.body.registryVersion).toBe("poc-v1.3.0");
+    expect(r.body.designrulesStatus).toBe("consumer-ready");
+    expect(r.body).not.toHaveProperty("linkedCatalog");
+    expect(r.body).not.toHaveProperty("linkedCrosswalk");
+    expect(r.body.modules).toHaveLength(18);
+    expect(r.body.viewComposition).toMatchObject({
+      moduleOrder: expect.any(Array),
+      crossCuttingModules: expect.any(Array),
+    });
+    expect((r.body.viewComposition as { moduleOrder: unknown[] }).moduleOrder).toHaveLength(15);
+    expect((r.body.viewComposition as { crossCuttingModules: unknown[] }).crossCuttingModules).toHaveLength(3);
+    for (const mod of r.body.modules as Array<Record<string, unknown>>) {
+      expect(mod).not.toHaveProperty("linkedCatalog");
+      expect(mod).not.toHaveProperty("linkedCrosswalk");
+    }
+  });
+
   it("version returns snapshotRestoreAvailable=true", async () => {
     configureCursorHandlerDeps({
       getExtensionHealth: async () => ({

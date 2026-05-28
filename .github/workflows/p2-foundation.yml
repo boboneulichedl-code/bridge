@@ -1,0 +1,24 @@
+name: P2 Foundation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  p2-foundation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: npm
+      - run: npm ci
+      - run: npm run validate:ui-modules
+      - run: npm run generate:control-tokens
+      - run: git diff --exit-code packages/ui/src/generated/
+      - run: npm run test:p2-ui
+      - run: npm run test:p0
+      - run: npm run build

@@ -35,6 +35,10 @@ describe("Step 2 — cursor-contract", () => {
     expect(CURSOR_API_ROUTES.snapshotRestore).toBe("/api/v1/cursor/snapshots");
   });
 
+  it("ui-modules route is part of the cursor API contract", () => {
+    expect(CURSOR_API_ROUTES.uiModules).toBe("/api/v1/cursor/ui-modules");
+  });
+
   it("covers all error codes with HTTP status", () => {
     expect(CURSOR_ERROR_HTTP_STATUS.ROLLBACK_NOT_AVAILABLE).toBe(501);
     expect(CURSOR_ERROR_HTTP_STATUS.CONFIRMATION_REQUIRED).toBe(428);

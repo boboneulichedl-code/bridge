@@ -1,6 +1,7 @@
 export * from "./types/action";
 export * from "./types/audit";
 export * from "./types/ipc";
+export * from "./types/ui-modules";
 export * from "./registry/load-registry";
 export * from "./security/security-gate";
 export * from "./security/types";
@@ -27,8 +28,8 @@ export { createFilesystemExecutor } from "./router/executors/filesystem";
 
 export { ROLLBACK_AVAILABLE } from "./types/action";
 
-import { listActions, getRegistryVersion } from "./registry/load-registry";
-import type { CursorActionMeta, CursorActionId } from "@bridge/shared";
+import { listActions, getRegistryVersion, getUiModulesRegistry } from "./registry/load-registry";
+import type { CursorActionMeta, CursorActionId, CursorUiModulesResponse } from "@bridge/shared";
 
 export function buildRegistryResponse() {
   const actions: CursorActionMeta[] = listActions().map((a) => ({
@@ -51,5 +52,18 @@ export function buildRegistryResponse() {
     adapterId: "cursor",
     rollbackAvailable: true as const,
     actions,
+  };
+}
+
+export function buildUiModulesResponse(): CursorUiModulesResponse {
+  const reg = getUiModulesRegistry();
+  return {
+    schemaVersion: reg.schemaVersion,
+    registryVersion: reg.registryVersion,
+    adapterId: "cursor",
+    runtimeActive: reg.runtimeActive,
+    designrulesStatus: reg.designrulesStatus,
+    viewComposition: reg.viewComposition,
+    modules: reg.modules,
   };
 }

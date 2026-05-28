@@ -1,7 +1,7 @@
 /**
  * Bridge Cursor adapter — HTTP + IPC contracts for /api/v1/cursor/*
  *
- * Scope: P0 technical foundation (IDE/program control). Not UI modules.
+ * Scope: P0 technical foundation (IDE/program control) plus P2 UI modules metadata (GET /ui-modules).
  *
  * Legacy separation:
  * - `/api/v1/prompt` (api-contract PromptRequest) = legacy orchestration
@@ -137,6 +137,45 @@ export interface CursorVersionResponse {
   compatibleActions: CursorActionId[];
   snapshotRestoreAvailable: RollbackAvailableP0;
   rollbackAvailable: RollbackAvailableP0;
+}
+
+// ---------------------------------------------------------------------------
+// UI modules metadata (GET /api/v1/cursor/ui-modules)
+// ---------------------------------------------------------------------------
+
+export interface CursorUiModuleMeta {
+  moduleId: string;
+  moduleVersion: string;
+  enabled: boolean;
+  category: string;
+  uiRiskLevel: string;
+  riskVisibility: string;
+  requiredPermissions: string[];
+  supportedActions: string[];
+  requiredDesignTokens: string[];
+  requiredComponents: string[];
+  requiredStates: string[];
+  linkedPreviewSections: string[];
+  implementationPhase: string;
+  rollbackUndoVisibility?: { visible: boolean; reason?: string };
+}
+
+export interface CursorUiModulesViewComposition {
+  viewId: string;
+  layout: string;
+  forbidden: string;
+  moduleOrder: string[];
+  crossCuttingModules: string[];
+}
+
+export interface CursorUiModulesResponse {
+  schemaVersion: string;
+  registryVersion: string;
+  adapterId: "cursor";
+  runtimeActive: boolean;
+  designrulesStatus: string;
+  viewComposition: CursorUiModulesViewComposition;
+  modules: CursorUiModuleMeta[];
 }
 
 // ---------------------------------------------------------------------------
@@ -405,13 +444,14 @@ export interface IdeControlHandshake {
 }
 
 // ---------------------------------------------------------------------------
-// Routes (10 actions + registry/version/audit/snapshot stub)
+// Routes (10 actions + registry/version/audit/ui-modules/snapshot stub)
 // ---------------------------------------------------------------------------
 
 export const CURSOR_API_ROUTES = {
   registry: `${CURSOR_API_SPEC}/registry`,
   version: `${CURSOR_API_SPEC}/version`,
   audit: `${CURSOR_API_SPEC}/audit`,
+  uiModules: `${CURSOR_API_SPEC}/ui-modules`,
   status: `${CURSOR_API_SPEC}/ide/status`,
   workspaceOpen: `${CURSOR_API_SPEC}/ide/workspace/open`,
   fsMkdir: `${CURSOR_API_SPEC}/ide/fs/mkdir`,

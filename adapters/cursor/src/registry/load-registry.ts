@@ -6,12 +6,14 @@ import type {
   PermissionsRegistry,
   TerminalWhitelistRegistry,
 } from "../types/action";
+import type { UiModulesRegistry } from "../types/ui-modules";
 
 let cached: {
   actions: ActionsRegistry;
   commands: CommandsRegistry;
   terminal: TerminalWhitelistRegistry;
   permissions: PermissionsRegistry;
+  uiModules: UiModulesRegistry;
 } | null = null;
 
 function registryDir(): string {
@@ -32,6 +34,7 @@ export function loadRegistries(): void {
     commands: loadJson<CommandsRegistry>("poc-v1-commands.json"),
     terminal: loadJson<TerminalWhitelistRegistry>("poc-v1-terminal-whitelist.json"),
     permissions: loadJson<PermissionsRegistry>("poc-v1-permissions.json"),
+    uiModules: loadJson<UiModulesRegistry>("poc-v1-ui-modules.json"),
   };
 }
 
@@ -68,6 +71,14 @@ export function getClientPermissions(clientId: string): string[] {
   const reg = getPermissionsRegistry();
   const entry = reg.clients[clientId] ?? reg.clients[reg.defaultClientId];
   return entry?.permissions ?? [];
+}
+
+export function getUiModulesRegistry(): UiModulesRegistry {
+  return ensureLoaded().uiModules;
+}
+
+export function getUiModulesRegistryVersion(): string {
+  return ensureLoaded().uiModules.registryVersion;
 }
 
 /** Test helper */

@@ -3,6 +3,7 @@ import * as crypto from "node:crypto";
 import {
   CapabilityRouter,
   buildRegistryResponse,
+  buildUiModulesResponse,
   evaluateSecurityGate,
   getAction,
   getRegistryVersion,
@@ -235,6 +236,11 @@ export async function handleCursorApi(
 
   if (pathname === CURSOR_META_ROUTES.registry && req.method === "GET") {
     json(res, 200, buildRegistryResponse());
+    return true;
+  }
+
+  if (pathname === CURSOR_META_ROUTES.uiModules && req.method === "GET") {
+    json(res, 200, buildUiModulesResponse());
     return true;
   }
 
