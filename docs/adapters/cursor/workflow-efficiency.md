@@ -21,128 +21,175 @@ flowchart LR
   Docs["docs/adapters/cursor/workflow-efficiency.md"]
   Cursor --> Rule
   Cursor --> User
-  Cursor --> ResponseFile["cursor_responses BRIDGE_WORKFLOW"]
+  Cursor --> ResponseFile["BRIDGE_WORKFLOW"]
+  Cursor --> PlanFile["BRIDGE_PLAN"]
   User -->|"ZIP + file list"| ChatGPT
   User --> ResponseFile
+  User --> PlanFile
   Docs --> User
   Rule --> Docs
   ResponseFile --> ChatGPT
+  PlanFile --> ChatGPT
 ```
 
 ---
 
-## 0. Cursor response file — BRIDGE filename law (every response, permanent unique)
+## 0. Handoff files — BRIDGE filename law
 
-After **every** Cursor response, save a **new** Markdown file permanently under:
+All handoff files live under:
 
 ```
 chatgpt_files/cursor_responses/
 ```
 
-Response files are a **chronological audit/handoff protocol** for User and ChatGPT.
+Permanent **chronological audit/handoff protocol** for User and ChatGPT.
 
-### Filename pattern (exact schema)
+### BRIDGE_WORKFLOW vs BRIDGE_PLAN
+
+| Type | Fixed segment | When | Main content |
+|------|---------------|------|--------------|
+| **WORKFLOW** | `BRIDGE_WORKFLOW` | Every Cursor response | Full Cursor answer |
+| **PLAN** | `BRIDGE_PLAN` | Plan created or updated | Full plan body |
+
+A **Plan Mode turn** may produce **both** files:
+
+1. `BRIDGE_WORKFLOW` — answer handoff (chat may be short)
+2. `BRIDGE_PLAN` — full plan (`PLAN_CREATED`, `PLAN_REVIEWED`, `FINAL_PLAN_CANDIDATE`, plan changed)
+
+```mermaid
+flowchart TD
+  Response[Every Cursor response] --> WF["BRIDGE_WORKFLOW file"]
+  PlanEvent[Plan created or updated] --> PL["BRIDGE_PLAN file"]
+  Response --> Chat[Short chat plus paths]
+  PlanEvent --> Chat
+  WF --> Handoff[User to ChatGPT]
+  PL --> Handoff
+```
+
+### Shared rules (both types)
+
+**Never use 4-digit HHMM.** Time is always **HHMMSS** (exactly 6 digits, local time).
+
+**Character rules:** `A-Z`, `a-z`, `0-9`, hyphen, underscore only. No spaces, colons, or other special characters.
+
+**Uniqueness and retention:**
+
+| Rule | Requirement |
+|------|-------------|
+| Overwrite | **Never** |
+| Collision | Append `_01`, `_02`, `_03`, … until unique |
+| Delete | **Never** |
+| Move | **Never** to `chatgpt_files/analysed/` |
+| Legacy | Old files without `BRIDGE_*` stay unchanged |
+
+### 0a — BRIDGE_WORKFLOW filename pattern
 
 ```
 YYYY-MM-DD_HHMMSS_BRIDGE_WORKFLOW_<ID>_<cursor-topic>.md
 ```
 
-**Never use 4-digit HHMM.** Time segment is always **HHMMSS** (exactly 6 digits, local time).
-
-### Segment reference
-
 | Segment | Rule | Example |
 |---------|------|---------|
 | Date | `YYYY-MM-DD` | `2026-05-28` |
 | Time | `HHMMSS` (6 digits) | `065234` |
-| Fixed | always `BRIDGE` | `BRIDGE` |
-| Fixed | always `WORKFLOW` | `WORKFLOW` |
-| `<ID>` | Current work ID | `P2-1-pre-1`, `P2-1-pre-report`, `P2-1a`, `Git-Checkpoint`, `CI-Fix`, `GENERAL` |
-| `<cursor-topic>` | Short, Cursor-defined | `execution-done_visual-foundation` |
-| Collision | append before `.md` | `_01`, `_02`, `_03` |
+| Fixed | `BRIDGE` | `BRIDGE` |
+| Fixed | `WORKFLOW` | `WORKFLOW` |
+| `<ID>` | Current work ID — **not** `WORKFLOW` or `PLAN` | `P2-1-pre-1`, `P2-1a`, `Git-Checkpoint`, `CI-Fix`, `GENERAL` |
+| `<cursor-topic>` | Cursor-defined | `execution-done_visual-foundation` |
+| Collision | before `.md` | `_01`, `_02` |
 
-### Character rules
-
-- Allowed: `A-Z`, `a-z`, `0-9`, hyphen (`-`), underscore (`_`)
-- **No** spaces
-- **No** colons
-- **No** other special characters
-
-### Uniqueness and retention (mandatory)
-
-| Rule | Requirement |
-|------|-------------|
-| Overwrite | **Never** overwrite an existing response file |
-| Collision | If filename exists, append `_01`, `_02`, `_03`, … until unique |
-| Delete | **Never** delete old response files |
-| Move | **Never** move response files to `chatgpt_files/analysed/` |
-| Purpose | Permanent chronological audit/handoff log |
-
-### Examples
+**Examples:**
 
 - `2026-05-28_065234_BRIDGE_WORKFLOW_P2-1-pre-1_execution-done_visual-foundation.md`
 - `2026-05-28_070012_BRIDGE_WORKFLOW_P2-1-pre-report_plan-created_git-checkpoint.md`
 - `2026-05-28_070045_BRIDGE_WORKFLOW_GENERAL_test_response-file-handoff.md`
-- `2026-05-28_070045_BRIDGE_WORKFLOW_GENERAL_test_response-file-handoff_01.md`
+- `2026-05-28_073606_BRIDGE_WORKFLOW_GENERAL_execution-done_bridge-plan-handoff-law.md`
 
-### Legacy files
+**Must contain:** Task, Phase, Workflow, Mode, full Cursor response, NEXT ACTION.
 
-Files already saved under older naming patterns (without `BRIDGE_WORKFLOW`) **remain unchanged**. Do not rename, delete, or move them. The BRIDGE filename law applies to **new** response files only.
+### 0b — BRIDGE_PLAN filename pattern
 
-### File must always contain
+```
+YYYY-MM-DD_HHMMSS_BRIDGE_PLAN_<ID>_<cursor-topic>.md
+```
 
-| Field | Required |
-|-------|----------|
-| Task | yes |
-| Phase | yes |
-| Workflow | yes |
-| Mode | yes |
-| Full Cursor response | yes — complete body, not a summary |
-| NEXT ACTION block | yes |
+| Segment | Rule | Example |
+|---------|------|---------|
+| Date | `YYYY-MM-DD` | `2026-05-28` |
+| Time | `HHMMSS` (6 digits) | `071500` |
+| Fixed | `BRIDGE` | `BRIDGE` |
+| Fixed | `PLAN` | `PLAN` |
+| `<ID>` | Current work ID — **not** `WORKFLOW` or `PLAN` | `P2-1a`, `Git-Checkpoint`, `CI-Fix`, `GENERAL` |
+| `<cursor-topic>` | Cursor-defined | `plan-created_cross-cutting-components` |
+| Collision | before `.md` | `_01`, `_02` |
 
-### Include when applicable
+**Trigger:** `PLAN_CREATED`, `PLAN_REVIEWED`, `FINAL_PLAN_CANDIDATE`, or plan file newly created/updated.
 
-- Current git stand (HEAD, branch, ahead/behind)
-- changed files / created files
-- tests run (command + result)
-- `git status --short`
-- forbidden paths touched yes/no
-- review bundle recommendation
-- CI status / failed step logs
-- exact staging list / push plan
+**`<ID>` must not duplicate category:** use `GENERAL` for general workflow-rule work, not `WORKFLOW` or `PLAN`. Forbidden: `BRIDGE_WORKFLOW_WORKFLOW_...`, `BRIDGE_PLAN_WORKFLOW_...`, `BRIDGE_PLAN_PLAN_...`.
+
+**Examples:**
+
+- `2026-05-28_071500_BRIDGE_PLAN_P2-1a_plan-created_cross-cutting-components.md`
+- `2026-05-28_071630_BRIDGE_PLAN_GENERAL_plan-reviewed_push-workflow-rules.md`
+- `2026-05-28_071730_BRIDGE_PLAN_Git-Checkpoint_final-plan-candidate_report-commit.md`
+- `2026-05-28_073606_BRIDGE_PLAN_GENERAL_execution-done_bridge-plan-handoff-demo.md`
+
+**Must contain:** Task, Phase, Workflow, Mode, **full plan** (not summary), NEXT ACTION.
+
+**Include when applicable (both types):** git stand, scope, files, abort conditions, tests, staging/push plan, changed/created files, `git status --short`, forbidden paths, review bundle, CI status/logs.
 
 ### Chat rules
 
-- The chat message **may be short** — the file holds the full answer
-- **Always** state the exact path of the **newly saved** response file in chat
-- Write a **new** file even for trivial one-word answers
-- **No exceptions** except a technical write failure — then report the error in chat
+- Chat **may be short** — files hold full content
+- **Always** state exact path(s) of newly saved file(s)
+- Plan Mode with new/changed plan: state **both** WORKFLOW and PLAN paths when both created
+- **No exceptions** except write failure
 
-### Response file template
+### WORKFLOW file template
 
 ```markdown
 # Cursor Response
 
 - **Task:** ...
-- **Phase:** ...
-- **Workflow:** ...
-- **Mode:** ...
 - **Filename:** YYYY-MM-DD_HHMMSS_BRIDGE_WORKFLOW_<ID>_<cursor-topic>.md
 - **Saved at:** YYYY-MM-DD HH:MM:SS (local)
 
 ---
 
 <full Cursor response body>
+```
+
+### PLAN file template
+
+```markdown
+# Cursor Plan Handoff
+
+- **Task:** ...
+- **Filename:** YYYY-MM-DD_HHMMSS_BRIDGE_PLAN_<ID>_<cursor-topic>.md
+- **Saved at:** YYYY-MM-DD HH:MM:SS (local)
 
 ---
 
-## Optional appendix
+<full plan body>
+
+---
+
+NEXT ACTION:
 ...
 ```
 
-### Exclude from review ZIPs (response files)
+### Legacy files
 
-Response files under `chatgpt_files/cursor_responses/` are for User → ChatGPT handoff. Include in ZIP only when explicitly requested for audit. Do not prune or archive as part of normal workflow.
+Files under older naming (without `BRIDGE_WORKFLOW` / `BRIDGE_PLAN`) **remain unchanged**.
+
+**Wrong-ID legacy demos** (do not rename/delete — error examples only):
+
+- `..._BRIDGE_WORKFLOW_WORKFLOW_...`
+- `..._BRIDGE_PLAN_WORKFLOW_...`
+
+### Exclude from review ZIPs
+
+Handoff files under `chatgpt_files/cursor_responses/` — include in ZIP only when explicitly requested. Do not prune or archive routinely.
 
 ---
 
@@ -423,6 +470,6 @@ When updating workflow rules:
 
 1. Edit this doc first (canonical spec)
 2. Sync [rules/workflow-efficiency.mdc](../../../rules/workflow-efficiency.mdc) summary
-3. Keep examples current with real phase names and BRIDGE_WORKFLOW filename schema
+3. Keep examples current with BRIDGE_WORKFLOW and BRIDGE_PLAN filename schemas
 4. Commit workflow rule files together in a docs-only checkpoint
 5. `chatgpt_files/cursor_responses/` — response logs; commit only when explicitly scoped
