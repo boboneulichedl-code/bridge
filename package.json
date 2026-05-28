@@ -29,7 +29,7 @@
     "test:p0": "npm test -w @bridge/shared && npm test -w @bridge/cursor-adapter && npm test -w bridge-api && npm test -w cursor-agent-bridge",
     "test:p2-ui": "npm test -w @bridge/ui && npm test -w @bridge/ui-cursor",
     "generate:control-tokens": "node scripts/generate-control-tokens.js",
-    "validate:ui-modules": "npm run build -w @bridge/cursor-adapter && node scripts/validate-ui-modules-registry.js"
+    "validate:ui-modules": "npm run build -w @bridge/shared -w @bridge/cursor-adapter && node scripts/validate-ui-modules-registry.js"
   },
   "engines": {
     "node": ">=18"
